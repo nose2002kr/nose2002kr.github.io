@@ -1,18 +1,35 @@
-import React, { Component } from 'react';
+import {useNavigate} from 'react-router-dom';
 import "./login.css";
+import {login} from '../api.js';
 
-class Signin extends Component {
-  render() {
+const Signin = () => {
+  const navigate = useNavigate();
+
+    let HandleSubmit = e => {
+      const nav = navigate;
+    
+      e.preventDefault();
+      e.stopPropagation();
+      console.log(e);
+      
+      login(
+        e.target.username.value,
+        e.target.password.value
+      )
+      .then(() => nav("/frame"))
+      .catch(() => alert('로그인 실패'));
+    };
+    
     return (
       <div className="login">
         <h4>Login</h4>
-        <form >
+        <form onSubmit={HandleSubmit}>
           <div className="text_area">
             <input
               type="text"
               id="username"
               name="username"
-              defaultValue="username"
+              placeholder='username'
               className="text_input"
 
             />
@@ -22,7 +39,7 @@ class Signin extends Component {
               type="password"
               id="password"
               name="password"
-              defaultValue="password"
+              placeholder='password'
               className="text_input"
 
             />
@@ -37,6 +54,5 @@ class Signin extends Component {
       </div>
     )
   }
-}
 
 export default Signin;
