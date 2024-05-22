@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import "./login.css";
-import {login} from '../api.js';
+import {post_login} from '../api.js';
 
 import { useAuth } from '../AuthContext.js';
 
@@ -12,7 +12,7 @@ const Signin = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    login(
+    post_login(
       e.target.username.value,
       e.target.password.value
     )

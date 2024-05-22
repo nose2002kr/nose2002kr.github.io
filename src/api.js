@@ -1,6 +1,7 @@
 import axios from "axios";
 
-console.log("API: " + process.env.REACT_APP_BASE_API_URL);
+//console.log("API: " + process.env.REACT_APP_BASE_API_URL);
+
 const apiClient = axios.create({
   baseURL: process.env.REACT_APP_BASE_API_URL,
   headers: {
@@ -25,11 +26,15 @@ apiClient.interceptors.response.use(
   }
 );
 
-// API 요청 함수들
-export const login = async (username, password) => {
-    const response = await apiClient.post('/login',{
-        username: username,
-        password: password
-    });
-    return response.data;
+export const post_login = async (username, password) => {
+  const response = await apiClient.post('/login',{
+      username: username,
+      password: password
+  });
+  return response.data;
+};
+
+export const get_videos = async () => {
+  const response = await apiClient.get('/videos');
+  return response.data;
 };
