@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './frame.css';
-
+import { useAuth } from './AuthContext';
+import Markdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 
 const Frame = () => {
     const [activeContent, setActiveContent] = useState('whoiam');
@@ -8,7 +10,6 @@ const Frame = () => {
         server1: true,
         server2: true,
     });
-
     const showContent = (id) => {
         setActiveContent(id);
     };
@@ -20,17 +21,47 @@ const Frame = () => {
         }));
     };
 
+    // const rootStyles = getComputedStyle(document.documentElement);
+    // const gotoLogin = () => {
+    //     console.log(myInitObject.login);
+    //     myInitObject.login = true;
+    // };
+
+    const [markdown, setMarkdown] = useState(null);
+
+    useEffect(() => {
+        // Function to download the file
+        const downloadFile = async () => {
+          const url = 'https://raw.githubusercontent.com/nose2002kr/nose2002kr/master/README.md';
+          try {
+            const response = await fetch(url);
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const data = await response.text();
+            setMarkdown(data);
+          } catch (error) {
+            console.error('There has been a problem with your fetch operation:', error);
+          }
+        };
+    
+        downloadFile();
+      }, []);
+
+
+    const {isAuthenticated} = useAuth();
+
     const publicUrl = process.env.PUBLIC_URL;
 
     return (
         <div className="card">
-        <div className="text-gray-800 height-inherity">
-            <div className="container mx-auto height-inherity">
+        <div className="text-gray-800 height-100">
+            <div className="container mx-auto height-100">
                 <header className="flex items-center justify-between p-4 py-4 header">
-                    <div className="text-3xl font-bold ml-1">KyoungSub</div>
-                    <div className="height-inherity"><img className="logo" src={`${publicUrl}/character.webp`}/></div>
+                    <div className="text-3xl font-bold ml-1">KSKS</div>
+                    <div className="height-100"><img className="logo" src={`${publicUrl}/character.webp`} alt=''/></div>
                 </header>
-                <div className="flex height-inherity shadow-2">
+                <div className="flex height-80 shadow-2">
                     <nav className="w-1/4 bg-pastel-100">
                         <ul>
                             <li
@@ -45,18 +76,20 @@ const Frame = () => {
                             >
                                 <b>Projects</b>
                             </li>
+                            {isAuthenticated && (
                             <li
                                 className="py-2 px-4 cursor-pointer hover:bg-gray-100 category"
                                 onClick={() => showContent('servers')}
                             >
                                 <b>Servers</b>
                             </li>
+                            )}
                         </ul>
                     </nav>
-                    <main className="w-3/4 p-4">
+                    <main className="w-3/4 p-4 overflow-scroll">
                         {activeContent === 'whoiam' && (
                             <div id="whoiam" className="content">
-                                <p>blahblahblah blahblahblah blahblahblah</p>
+                                {markdown ? <Markdown rehypePlugins={[rehypeRaw]}>{markdown}</Markdown>: <p>Loading...</p>}
                             </div>
                         )}
                         {activeContent === 'video' && (
@@ -78,7 +111,9 @@ const Frame = () => {
                                 </div> */}
                             </div>
                         )}
-                        {activeContent === 'servers' && (
+                        {
+                        isAuthenticated &&
+                        activeContent === 'servers' && (
                             <div id="servers" className="content">
                                 <ul>
                                     <li

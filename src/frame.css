@@ -10,6 +10,10 @@
 :before {
   --tw-content: "";
 }
+:root {
+  --card-width: 650px;
+  --card-height: 700px;
+}
 html {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
@@ -36,15 +40,6 @@ hr {
 abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
 }
 a {
   color: inherit;
@@ -83,8 +78,15 @@ table {
   border-color: inherit;
   border-collapse: collapse;
 }
-.height-inherity {
+.height-100 {
   height: 100%
+}
+.height-80 {
+  height: 80%
+}
+.overflow-scroll {
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 button,
 input,
@@ -191,22 +193,6 @@ button {
 }
 :disabled {
   cursor: default;
-}
-audio,
-canvas,
-embed,
-iframe,
-img,
-object,
-svg,
-video {
-  display: block;
-  vertical-align: middle;
-}
-img,
-video {
-  max-width: 100%;
-  height: auto;
 }
 [hidden] {
   display: none;
@@ -408,8 +394,8 @@ video {
 .card {
   display: inline-block;
   background: #FFFFFF;
-  width: 650px;
-  height: 700px;
+  width: var(--card-width);
+  height: var(--card-height);
   margin-top: 6%;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.18);
