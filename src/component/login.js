@@ -30,7 +30,7 @@ const Signin = () => {
     rewind();
   };
   return (
-    <div className="container">
+    <div className="container" style={{opacity:"0"}}>
       <svg className="back" fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" onClick={gotoBack} cursor="pointer">
         <g data-name="Layer 2"> <g data-name="arrow-ios-back">
         <rect width="24" height="24" transform="rotate(90 12 12)" opacity="0"/>

@@ -55,7 +55,7 @@ const Frame = () => {
     const publicUrl = process.env.PUBLIC_URL;
 
     return (
-        <div className="text-gray-800 height-100 container">
+        <div className="text-gray-800 height-100 container" style={{opacity:"0"}}>
             <div className="mx-auto height-100">
                 <header className="flex items-center justify-between p-4 py-4 header">
                     <div className="text-3xl font-bold ml-1">KSKS</div>

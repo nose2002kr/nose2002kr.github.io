@@ -47,11 +47,10 @@ export const CardContextProvider = ( {children } ) => {
   const [phase, setPhase] = useState(1);
   return (
     <CardContext.Provider value={{ phase, setPhase }}>
-      {children}
+      {children} 
     </CardContext.Provider>
   );
 };
-
 
 const useStackableCard = () => {
   const ANIMATION_DURATION = 500;
