@@ -40,17 +40,13 @@ form{
     cursor: pointer;
 }
 
-.login{
-    display: inline-block;
-    background: #FFFFFF;
-    width: 450px;
-    height: 500px;
-    margin-top: 12%;
-    border-radius: 20px;
-}
-
 .back{
     width: 35pt;
     height: 35pt;
     float: left;
 }
+.container{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+  }

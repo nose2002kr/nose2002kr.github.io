@@ -1,0 +1,11 @@
+
+.card {
+    display: inline-block;
+    background: #FFFFFF;
+    width: 650px;
+    height: 700px;
+    margin-top: 6%;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}

@@ -25,13 +25,7 @@ const Frame = () => {
 
     const { setPhase } = useCard();
     const gotoLogin = () => {
-        document.querySelector("#root > div > div > div > div > div").style.animation = 'slide-out 0.5s ease';
-        document.querySelector("#root > div > div > div > div > div").style.animationFillMode = 'forwards';
-        document.querySelector("#root > div > div > div").style.animation = 'resize 0.5s ease';
-        document.querySelector("#root > div > div > div").style.animationFillMode = 'forwards';
-        setTimeout(() => {
-            setPhase(1);
-        }, 500);
+        setPhase(2);
     };
 
     const [markdown, setMarkdown] = useState(null);
@@ -61,9 +55,8 @@ const Frame = () => {
     const publicUrl = process.env.PUBLIC_URL;
 
     return (
-        <div className="card">
-        <div className="text-gray-800 height-100">
-            <div className="container mx-auto height-100">
+        <div className="text-gray-800 height-100 container">
+            <div className="mx-auto height-100">
                 <header className="flex items-center justify-between p-4 py-4 header">
                     <div className="text-3xl font-bold ml-1">KSKS</div>
                     <div className="height-100"><img className="logo" src={`${publicUrl}/character.webp`} alt='' onClick={gotoLogin}/></div>
@@ -131,7 +124,6 @@ const Frame = () => {
                     </main>
                 </div>
             </div>
-        </div>
         </div>
     );
 };

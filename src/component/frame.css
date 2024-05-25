@@ -10,10 +10,7 @@
 :before {
   --tw-content: "";
 }
-:root {
-  --card-width: 650px;
-  --card-height: 700px;
-}
+
 html {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
@@ -391,16 +388,7 @@ button {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
-.card {
-  display: inline-block;
-  background: #FFFFFF;
-  width: var(--card-width);
-  height: var(--card-height);
-  margin-top: 6%;
-  border-radius: 20px;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.18); */
-  overflow: hidden;
-}
+
 #whoiam > div > :nth-child(1) { animation: slide-in 0.5s ease 0.1s; animation-fill-mode: both; }
 #whoiam > div > :nth-child(2) { animation: slide-in 0.5s ease 0.3s; animation-fill-mode: both; }
 #whoiam > div > :nth-child(3) { animation: slide-in 0.5s ease 0.5s; animation-fill-mode: both; }
@@ -668,4 +656,9 @@ html {
 .__className_aaf875 {
   font-family: __Inter_aaf875, __Inter_Fallback_aaf875;
   font-style: normal;
+}
+.container{
+  position: absolute;
+  width: inherit;
+  height: inherit;
 }

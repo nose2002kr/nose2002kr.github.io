@@ -21,12 +21,30 @@ class Stack {
   }
 }
 
+const CardStyles = {
+  phase1: {
+    title: 'Welcome',
+    cardGeometry: {
+      width:'650px',
+      height: '700px',
+      marginTop: '6%'
+    }
+  },
+  phase2: {
+    title: 'Login',
+    cardGeometry: {
+      width: '450px',
+      height: '500px',
+      marginTop: '12%'
+    }
+  }
+}
 
 // Create a context
 export const CardContext = createContext();
 
 export const CardContextProvider = ( {children } ) => {
-  const [phase, setPhase] = useState(0);
+  const [phase, setPhase] = useState(1);
   return (
     <CardContext.Provider value={{ phase, setPhase }}>
       {children}
@@ -36,21 +54,67 @@ export const CardContextProvider = ( {children } ) => {
 
 
 const useStackableCard = () => {
+  const ANIMATION_DURATION = 500;
   const {phase, setPhase} = useContext(CardContext);
   if (CardContext.history === undefined) 
     CardContext.history = new Stack();
   
-  const setStackablePhase = (el) => {
+  const switchPhase = (value, rewind = false) => {
+    let card = document.querySelector("#card");
+    if (card === undefined) {
+      setPhase(value);
+      return;
+    }
+
+    let container = card.firstChild;
+    container.animate(
+      rewind === true ? [
+        { transform: 'translateX(0%)', opacity:'1' },
+        { transform: 'translateX(+100%)', opacity:'0' }
+      ] : [
+        { transform: 'translateX(0%)', opacity:'1' },
+        { transform: 'translateX(-100%)', opacity:'0' }
+      ],
+    {
+      duration: ANIMATION_DURATION, fill: 'forwards', easing: 'ease'
+    });
+    card.animate([
+      { },
+      CardStyles['phase'+value].cardGeometry
+    ], {
+      duration: ANIMATION_DURATION, fill: 'forwards', easing: 'ease'
+    });
+    
+    setPhase(phase | value);
+    setTimeout(() => {
+      let sibling = container.nextSibling;
+      if (sibling === null) sibling = container.previousSibling;
+      if (sibling === null) return;
+      console.log([container.nextSibling, container.previousSibling, sibling])
+      sibling.animate(
+        rewind === true ? [
+          { transform: 'translateX(-100%)', opacity:'0' },
+          { transform: 'translateX(0%)', opacity:'1' }
+        ] : [
+          { transform: 'translateX(+100%)', opacity:'0' },
+          { transform: 'translateX(0%)', opacity:'1' }
+        ],
+      {
+        duration: ANIMATION_DURATION, fill: 'forwards', easing: 'ease'
+      });
+    }, 0);
+    setTimeout(() => setPhase(value), ANIMATION_DURATION);
+  };
+  
+  const setStackablePhase = (value) => {
     CardContext.history.push(phase);
-    console.log(CardContext.history)
-    setPhase(el);
+    switchPhase(value);
   };
 
   const rewind = () => {
-    setPhase(CardContext.history.pop());
+    switchPhase(CardContext.history.pop(), true);
   };
 
-  console.log(useContext(CardContext))
   return { phase:phase,
            setPhase:setStackablePhase,
            rewind: rewind};
