@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './frame.css';
-import { useAuth } from './AuthContext';
-import Video from './component/videos'
+import { useAuth } from '../context/AuthContext';
+import Video from './videos'
 import Markdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
+import { useCard } from '../context/CardContext';
 
 const Frame = () => {
     const [activeContent, setActiveContent] = useState('whoiam');
@@ -22,11 +23,16 @@ const Frame = () => {
         }));
     };
 
-    // const rootStyles = getComputedStyle(document.documentElement);
-    // const gotoLogin = () => {
-    //     console.log(myInitObject.login);
-    //     myInitObject.login = true;
-    // };
+    const { setPhase } = useCard();
+    const gotoLogin = () => {
+        document.querySelector("#root > div > div > div > div > div").style.animation = 'slide-out 0.5s ease';
+        document.querySelector("#root > div > div > div > div > div").style.animationFillMode = 'forwards';
+        document.querySelector("#root > div > div > div").style.animation = 'resize 0.5s ease';
+        document.querySelector("#root > div > div > div").style.animationFillMode = 'forwards';
+        setTimeout(() => {
+            setPhase(1);
+        }, 500);
+    };
 
     const [markdown, setMarkdown] = useState(null);
 
@@ -60,7 +66,7 @@ const Frame = () => {
             <div className="container mx-auto height-100">
                 <header className="flex items-center justify-between p-4 py-4 header">
                     <div className="text-3xl font-bold ml-1">KSKS</div>
-                    <div className="height-100"><img className="logo" src={`${publicUrl}/character.webp`} alt=''/></div>
+                    <div className="height-100"><img className="logo" src={`${publicUrl}/character.webp`} alt='' onClick={gotoLogin}/></div>
                 </header>
                 <div className="flex height-80 shadow-2">
                     <nav className="w-1/4 bg-pastel-100">
