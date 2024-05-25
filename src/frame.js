@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './frame.css';
 import { useAuth } from './AuthContext';
+import Video from './component/videos'
 import Markdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 
@@ -89,27 +90,11 @@ const Frame = () => {
                     <main className="w-3/4 p-4 overflow-scroll">
                         {activeContent === 'whoiam' && (
                             <div id="whoiam" className="content">
-                                {markdown ? <Markdown rehypePlugins={[rehypeRaw]}>{markdown}</Markdown>: <p>Loading...</p>}
+                                {markdown ? <Markdown rehypePlugins={[rehypeRaw]}>{markdown}</Markdown>: <p/>}
                             </div>
                         )}
                         {activeContent === 'video' && (
-                            <div id="video" className="content">
-                                <div className="mb-4">
-                                    <h2 className="text-xl font-bold">Project1</h2>
-                                    <div className="bg-gray-200 p-4 mb-2">youtube</div>
-                                </div>
-                                <div className="mb-4">
-                                    <h2 className="text-xl font-bold">Project2</h2>
-                                    <div className="bg-gray-200 p-4 mb-2">youtube</div>
-                                </div>
-                                {/* <div className="flex justify-center">
-                                    <div className="flex space-x-2">
-                                        {[1, 2, 3, 4, 5].map((number) => (
-                                            <span key={number} className="cursor-pointer">{number}</span>
-                                        ))}
-                                    </div>
-                                </div> */}
-                            </div>
+                            <Video></Video>
                         )}
                         {
                         isAuthenticated &&
