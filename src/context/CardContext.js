@@ -52,6 +52,13 @@ export const CardContextProvider = ( {children } ) => {
   );
 };
 
+const isRunning = (phase) => {
+  if (phase <= 0) {
+      return true;
+  }
+  return (phase & (phase - 1)) !== 0;
+}
+
 const useStackableCard = () => {
   const ANIMATION_DURATION = 500;
   const {phase, setPhase} = useContext(CardContext);
@@ -106,11 +113,13 @@ const useStackableCard = () => {
   };
   
   const setStackablePhase = (value) => {
+    if (isRunning(phase)) return;
     CardContext.history.push(phase);
     switchPhase(value);
   };
 
   const rewind = () => {
+    if (isRunning(phase)) return;
     switchPhase(CardContext.history.pop(), true);
   };
 
