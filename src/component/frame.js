@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Tooltip from '@mui/material/Tooltip';
+
 import './frame.css';
 import { useAuth } from '../context/AuthContext';
 import Video from './videos'
@@ -6,6 +8,24 @@ import Markdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import { useCard } from '../context/CardContext';
 
+const TooltipWrapper = ({ children, title }) => (
+  <Tooltip title={title}>
+    <span>{children}</span>
+  </Tooltip>
+);
+
+const MarkdownRenderer = ({ markdown }) => (
+<Markdown
+    rehypePlugins={[rehypeRaw]}
+    components={{
+    tooltip: ({node, ...props}) => <TooltipWrapper {...props} />,
+    }}
+>
+    {markdown}
+</Markdown>
+);
+
+  
 const Frame = () => {
     const [activeContent, setActiveContent] = useState('whoiam');
     const [serverStatus, setServerStatus] = useState({
@@ -65,10 +85,11 @@ const Frame = () => {
                     <nav className="w-1/4 bg-pastel-100">
                         <ul>
                             <li
+                            
                                 className="py-2 px-4 cursor-pointer hover:bg-gray-100 category"
                                 onClick={() => showContent('whoiam')}
                             >
-                                <b>Who I am</b>
+                            <b>Who I am</b>
                             </li>
                             <li
                                 className="py-2 px-4 cursor-pointer hover:bg-gray-100 category"
@@ -89,7 +110,7 @@ const Frame = () => {
                     <main className="w-3/4 p-4 overflow-scroll">
                         {activeContent === 'whoiam' && (
                             <div id="whoiam" className="content">
-                                {markdown ? <Markdown rehypePlugins={[rehypeRaw]}>{markdown}</Markdown>: <p/>}
+                                {markdown ? <MarkdownRenderer markdown={markdown} />: <p/>}
                             </div>
                         )}
                         {activeContent === 'video' && (

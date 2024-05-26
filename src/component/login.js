@@ -1,6 +1,7 @@
 import {useNavigate} from 'react-router-dom';
-import "./login.css";
 import {post_login} from '../api.js';
+import {NotificationManager} from 'react-notifications';
+import "./login.css";
 
 import { useAuth } from '../context/AuthContext.js';
 import { useCard } from '../context/CardContext.js';
@@ -23,7 +24,7 @@ const Signin = () => {
       setIsAuthenticated(true);
       navigate.push('/');
     })
-    .catch(() => alert('로그인 실패'));
+    .catch(() => NotificationManager.error('로그인 정보가 올바르지 않습니다.'));
   };
   
   const gotoBack = () => {
