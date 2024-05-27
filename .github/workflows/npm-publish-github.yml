@@ -12,16 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Clone source
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
       
       - name: set up node.js
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           
       - name: build
-      - run: npm ci
-      - run: npm run build
+        run: |
+          npm ci
+          npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
