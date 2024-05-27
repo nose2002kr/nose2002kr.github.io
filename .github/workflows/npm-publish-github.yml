@@ -4,9 +4,8 @@
 name: Deploy Node.js to pages
 
 on:
-  release:
-    types: [created]
-
+  push:
+    
 jobs:
   build:
     runs-on: ubuntu-latest
