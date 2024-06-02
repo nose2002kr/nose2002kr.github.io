@@ -354,7 +354,7 @@ button {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 .bg-pastel-100 {
-  background-color: #dfffef;
+  background-color: #f4fffa;
 }
 .justify-between {
   justify-content: space-between;
@@ -634,7 +634,19 @@ html {
   max-width: 100%;
 }
 .header{
-  height: 150px
+  height: 150px;
+}
+.avatar-user {
+  border-radius: 50% !important;
+}
+.avatar {
+  display: inline-block;
+  flex-shrink: 0;
+  line-height: 1;
+  overflow: hidden;
+  vertical-align: middle;
+  cursor: pointer;
+  box-shadow: 0.2px 0.2px 7px rgba(0, 0, 0, 0.3);
 }
 .hover\:bg-blue-700:hover {
   --tw-bg-opacity: 1;
