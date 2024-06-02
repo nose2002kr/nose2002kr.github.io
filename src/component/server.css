@@ -1,13 +1,3 @@
-body {
-  margin: 25px;
-}
-
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
 
 .status {
   &.open:before {
@@ -39,4 +29,34 @@ ul {
   }
 }
   
-  
+.console {
+    width: 100%;
+    height: 150pt;
+    overflow-y: auto;
+}
+
+.prompt {
+    padding: 0pt;
+    margin-top: 5pt;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.prompt-field {
+    border: none;
+    background: none;
+    width: 100%;
+    outline: none;
+    font-size: 12px;
+}
+
+.prompt-cursor {
+    width: 0.8em;
+    height: 0.8em;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABaSURBVChTY6AtmDx5cvnUqVP1oFzsoL+/XwCo8DEQv584caIVVBg7mDBhghxQ4Y2+vr6vU6ZM8YAKYwdA00SB+CxQ8S+g4jCoMCYgSiFRVpPkGaAiHMHDwAAA5Ko+F4/l6+MAAAAASUVORK5CYII=);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin-right: 3pt;
+}

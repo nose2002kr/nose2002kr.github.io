@@ -82,7 +82,7 @@ table {
   height: 80%
 }
 .overflow-scroll {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 button,

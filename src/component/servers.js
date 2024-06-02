@@ -5,6 +5,11 @@ import { get_servers } from '../api';
 
 const Servers = () => {
     const [servers, setServers] = useState(null);
+    const [openFolderId, setOpenFolderId] = useState(null);
+    const handleServerClick = (id) => {
+        setOpenFolderId((prevId) => (prevId === id ? null : id));
+    };
+
     useEffect(() => {
         get_servers()
         .then((e) => setServers(e))
@@ -15,8 +20,12 @@ const Servers = () => {
     <ul>
         {
             servers !== null &&
-            servers.map((server, index) => (
-            <Server prop={server} />
+            servers.map((server, idx) => (
+            <Server 
+                prop={server}
+                isOpened={openFolderId === idx}
+                handleClickEvent={()=>handleServerClick(idx)}
+             />
             ))
         }
     </ul>
