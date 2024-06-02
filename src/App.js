@@ -6,6 +6,15 @@ import { CardContextProvider } from './context/CardContext';
 import { NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
+import { setupWorker } from 'msw/browser'
+import { handlers } from './api_mock'
+ 
+if (process.env.NODE_ENV === 'development') {
+	console.log(process.env.NODE_ENV)
+	const worker = setupWorker(...handlers)
+	worker.start();
+}
+
 function App() {
   return (
     	<div className='App'>

@@ -36,6 +36,11 @@ export const post_login = async (username, password) => {
 
 export const get_videos = async () => {
   const response = await apiClient.get('/video');
-  console.log(response)
   return response.data;
 };
+
+export const get_servers = async () => {
+  const response = await apiClient.get('/servers');
+  return response.data;
+};
+

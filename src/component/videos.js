@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import Tooltip from '@mui/material/Tooltip';
+
 import './videos.css';
 import { get_videos } from '../api';
 
@@ -15,7 +17,9 @@ const Videos = () => {
       {videos !== null &&
         videos.map((project, index) => (
         <div key={index} className="mb-4">
-          <h2 className="text-xl font-bold">{project.project_name}</h2>
+          <Tooltip title={project.description}>
+            <h2 className="text-xl font-bold fit-width">{project.project_name}</h2>
+          </Tooltip>
           <div className="bg-gray-200 p-4 mb-2">
           <iframe width="100%" height="300px" title={project.project_name} src={project.video_link} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>

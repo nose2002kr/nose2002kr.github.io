@@ -4,3 +4,6 @@ font-weight: 700;
 .text-xl {
     text-align: left;
 }
+.fit-width {
+    width: fit-content;
+}
