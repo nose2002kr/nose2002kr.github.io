@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Console, Hook,Unhook } from 'console-feed' // https://www.npmjs.com/package/console-feed
+import { Console } from 'console-feed' // https://www.npmjs.com/package/console-feed
 
 import { useAuth } from '../context/AuthContext';
 import { prompt_to_servers } from '../api';
@@ -10,15 +10,31 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
     const [status, setStatus] = useState(false);
     const [logs, setLogs] = useState([])
 
+    const appendLog = (log) => {
+        setLogs(
+            (pv) => [...pv, log]
+        )
+        document.querySelector("#console").scrollTo(0,document.body.scrollHeight)
+    }
+
     const onPrompt = (e) => {
         e.preventDefault();
-        prompt_to_servers(prop.server_name, 'hello', (msg) => {console.log('kakaka: ' + msg)})
+
+        appendLog({method:'command', data:[e.target.prompt_field.value]})
+        prompt_to_servers(
+            prop.server_name,
+            e.target.prompt_field.value,
+            (msg) => appendLog({method:'result', data:[msg.data]})
+        )
         .then(()=>alert('success :)'))
-        .catch(()=>alert('failure :('));
+        .catch((e)=>{
+            alert('failure :(')
+            console.log(e)
+        }
+        );
     }
 
     useEffect(() => {
-        console.log('called by ' + prop.server_name)
         let status = false;
         const checkServer = () => 
             fetch(prop.survival_check)
@@ -59,11 +75,11 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
             {prop.server_name}
             </div>
             {isOpened && (
-                <div className='console'>
+                <div className='console' id='console'>
                     <Console logs={logs} variant="light" />
                     <div className='prompt'>
                         <div className='prompt-cursor'/>
-                        <form  onSubmit={onPrompt}><input className='prompt-field' type='text' tabIndex='-1'/></form>
+                        <form  onSubmit={onPrompt}><input className='prompt-field' type='text' tabIndex='-1' id='prompt_field'/></form>
                     </div>
                 </div>
             )}

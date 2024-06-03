@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext.js';
 import { useCard } from '../context/CardContext.js';
 
 const Signin = () => {
-  const { setIsAuthenticated } = useAuth();
+  const { setAuthentication } = useAuth();
   const { rewind } = useCard();
   const navigate = useNavigate();
   let HandleSubmit = e => {
@@ -19,12 +19,15 @@ const Signin = () => {
       e.target.username.value,
       e.target.password.value
     )
-    .then(() => {
-      localStorage.setItem('isAuthenticated', 'true');
-      setIsAuthenticated(true);
-      navigate.push('/');
+    .then((token) => {
+      setAuthentication(token);
+      rewind()
+      NotificationManager.info('로그인 되었습니다.')
     })
-    .catch(() => NotificationManager.error('로그인 정보가 올바르지 않습니다.'));
+    .catch((e) => {
+      NotificationManager.error('로그인 정보가 올바르지 않습니다.')
+      console.log(e)
+    });
   };
   
   const gotoBack = () => {

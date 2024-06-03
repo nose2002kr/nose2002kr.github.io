@@ -1,4 +1,7 @@
 import axios from "axios";
+import { is_authentication_valid } from "./context/AuthContext";
+
+
 
 //console.log("API: " + process.env.REACT_APP_BASE_API_URL);
 
@@ -11,10 +14,13 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   config => {
-    // config.headers.Authorization = `Bearer ${token}`;
+    if (is_authentication_valid())
+      config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
+
     return config;
   },
   error => {
+    console.log(error)
     return Promise.reject(error);
   }
 );
@@ -46,10 +52,15 @@ export const get_servers = async () => {
 
 export const prompt_to_servers = async (server, prompt, onmessage = undefined) => {
   return new Promise((resolve, reject) => {
-    const socket = new WebSocket(`${process.env.REACT_APP_BASE_API_URL}/server/${server}/prompt?token=hehe`);
+    if (!is_authentication_valid()) {
+      reject('Login first');
+      return;
+    }
+  
+    const socket = new WebSocket(`${process.env.REACT_APP_BASE_API_URL}/server/${server}/run?token=${localStorage.getItem('access_token')}`);
     socket.onmessage = onmessage
-    socket.onopen = () => socket.send("Hello from client");
-    socket.onclose = () => resolve();
+    socket.onopen = () => socket.send(prompt);
+    socket.onclose = (e) => e.code === 1000 ? resolve() : reject(e)
     socket.onerror = (err) => reject(err);
   });
 }

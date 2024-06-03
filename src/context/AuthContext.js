@@ -4,24 +4,38 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ( {children } ) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // Mock function to check authentication status
-  const checkAuth = () => {
-    // Replace this with real authentication check
-    //const authStatus = localStorage.getItem('isAuthenticated') === 'true';
-    setIsAuthenticated(false);
-  };
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
+  const [authentication, setAuthentication] = useState(null);
+ 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+    <AuthContext.Provider value={{ authentication, setAuthentication }}>
       {children }
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+const _useAuth = (authContext) => {
+  const {authentication, setAuthentication} = useContext(authContext)
+
+  const setAuthenticationToLocalStorage = (token) => {
+    localStorage.setItem('access_token', token.access_token);
+    setAuthentication(token);
+  }
+
+  const authenticationFromLocalStorage = () => {
+    let token = authentication();
+    if (token === null) 
+      token = localStorage.getItem('access_token');
+    return token;
+  }
+
+  return {
+    authentication: authenticationFromLocalStorage,
+    setAuthentication: setAuthenticationToLocalStorage
+  }
+}
+
+export const is_authentication_valid = () => {
+  return (typeof localStorage.getItem('access_token') === 'string' && localStorage.getItem('access_token') !== '');
+}
+
+export const useAuth = () => _useAuth(AuthContext);
