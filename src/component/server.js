@@ -62,7 +62,7 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
         return () => {
             clearInterval(interval)
           };
-    }, []);
+    }, [prop.server_name, prop.survival_check]);
     
     const {isAuthenticationValid} = useAuth();
     

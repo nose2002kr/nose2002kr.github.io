@@ -1,4 +1,3 @@
-import {useNavigate} from 'react-router-dom';
 import {post_login} from '../api.js';
 import {NotificationManager} from 'react-notifications';
 import "./login.css";
@@ -9,7 +8,6 @@ import { useCard } from '../context/CardContext.js';
 const Signin = () => {
   const { setAuthentication } = useAuth();
   const { rewind } = useCard();
-  const navigate = useNavigate();
   let HandleSubmit = e => {
     
     e.preventDefault();
