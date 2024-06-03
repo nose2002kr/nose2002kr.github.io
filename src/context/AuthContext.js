@@ -34,7 +34,7 @@ const _useAuth = (authContext) => {
   }
 }
 
-export const is_authentication_valid = () => {
+export const isAuthenticationValid = () => {
   return (typeof localStorage.getItem('access_token') === 'string' && localStorage.getItem('access_token') !== '');
 }
 

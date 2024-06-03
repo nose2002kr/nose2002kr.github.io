@@ -1,5 +1,5 @@
 import axios from "axios";
-import { is_authentication_valid } from "./context/AuthContext";
+import { isAuthenticationValid } from "./context/AuthContext";
 
 
 
@@ -14,7 +14,7 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   config => {
-    if (is_authentication_valid())
+    if (isAuthenticationValid())
       config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
 
     return config;
@@ -52,7 +52,7 @@ export const get_servers = async () => {
 
 export const prompt_to_servers = async (server, prompt, onmessage = undefined) => {
   return new Promise((resolve, reject) => {
-    if (!is_authentication_valid()) {
+    if (!isAuthenticationValid()) {
       reject('Login first');
       return;
     }

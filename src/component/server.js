@@ -64,7 +64,7 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
           };
     }, []);
     
-    const {isAuthenticated} = useAuth();
+    const {isAuthenticationValid} = useAuth();
     
     return (
         <li >
@@ -77,10 +77,12 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
             {isOpened && (
                 <div className='console' id='console'>
                     <Console logs={logs} variant="light" />
+                    {isAuthenticationValid && (
                     <div className='prompt'>
                         <div className='prompt-cursor'/>
-                        <form  onSubmit={onPrompt}><input className='prompt-field' type='text' tabIndex='-1' id='prompt_field'/></form>
+                            <form  onSubmit={onPrompt}><input className='prompt-field' type='text' tabIndex='-1' id='prompt_field'/></form>
                     </div>
+                    )}
                 </div>
             )}
 
