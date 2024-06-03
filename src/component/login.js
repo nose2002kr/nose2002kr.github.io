@@ -39,7 +39,7 @@ const Signin = () => {
         </g> </g>
       </svg>
       <h4>Login</h4>
-      <form onSubmit={HandleSubmit}>
+      <form className="loginForm" onSubmit={HandleSubmit}>
         <div className="text_area">
           <input
             type="text"

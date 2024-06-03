@@ -44,3 +44,13 @@ export const get_servers = async () => {
   return response.data;
 };
 
+export const prompt_to_servers = async (server, prompt, onmessage = undefined) => {
+  return new Promise((resolve, reject) => {
+    const socket = new WebSocket(`${process.env.REACT_APP_BASE_API_URL}/server/${server}/prompt?token=hehe`);
+    socket.onmessage = onmessage
+    socket.onopen = () => socket.send("Hello from client");
+    socket.onclose = () => resolve();
+    socket.onerror = (err) => reject(err);
+  });
+}
+

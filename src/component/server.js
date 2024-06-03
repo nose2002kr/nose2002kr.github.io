@@ -2,12 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Console, Hook,Unhook } from 'console-feed' // https://www.npmjs.com/package/console-feed
 
 import { useAuth } from '../context/AuthContext';
+import { prompt_to_servers } from '../api';
 
 import './server.css';
 
 const Server = ({prop, isOpened, handleClickEvent}) => {
     const [status, setStatus] = useState(false);
     const [logs, setLogs] = useState([])
+
+    const onPrompt = (e) => {
+        e.preventDefault();
+        prompt_to_servers(prop.server_name, 'hello', (msg) => {console.log('kakaka: ' + msg)})
+        .then(()=>alert('success :)'))
+        .catch(()=>alert('failure :('));
+    }
 
     useEffect(() => {
         console.log('called by ' + prop.server_name)
@@ -43,18 +51,19 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
     const {isAuthenticated} = useAuth();
     
     return (
-        <li 
+        <li >
+            <div
             className={`py-2 items-center cursor-pointer status ${status ? 'open' : 'dead'}`}
             id={prop.server_name}
-            onClick={handleClickEvent}
-            >
+            onClick={handleClickEvent}>
             {prop.server_name}
+            </div>
             {isOpened && (
                 <div className='console'>
                     <Console logs={logs} variant="light" />
                     <div className='prompt'>
                         <div className='prompt-cursor'/>
-                        <input className='prompt-field' type='text' tabIndex='-1'/>
+                        <form  onSubmit={onPrompt}><input className='prompt-field' type='text' tabIndex='-1'/></form>
                     </div>
                 </div>
             )}
