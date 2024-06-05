@@ -53,7 +53,7 @@ export const get_servers = async () => {
 export const prompt_to_servers = async (server, prompt, onmessage = undefined) => {
   return new Promise((resolve, reject) => {
     if (!isAuthenticationValid()) {
-      reject('Login first');
+      reject({code:1003});
       return;
     }
   
