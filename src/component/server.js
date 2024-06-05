@@ -94,7 +94,7 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
                             {isLoading ? (
                                 <div className='loading'/>
                             ) : (
-                                <input className='prompt-field' type='text' tabIndex='-1' id='prompt_field'/>
+                                <input className='prompt-field' type='text' tabIndex='-1' id='prompt_field' disabled={!status ? true : false}/>
                             )}
                             </form>
                     </div>
