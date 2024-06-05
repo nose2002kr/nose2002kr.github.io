@@ -50,7 +50,7 @@ export const get_servers = async () => {
   return response.data;
 };
 
-export const prompt_to_servers = async (server, prompt, onmessage = undefined) => {
+export const run_to_server = async (server, prompt, onmessage = undefined) => {
   return new Promise((resolve, reject) => {
     if (!isAuthenticationValid()) {
       reject({code:1003});
@@ -64,4 +64,3 @@ export const prompt_to_servers = async (server, prompt, onmessage = undefined) =
     socket.onerror = (err) => reject(err);
   });
 }
-

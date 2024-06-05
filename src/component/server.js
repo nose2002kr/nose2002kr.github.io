@@ -4,7 +4,7 @@ import { NotificationManager } from 'react-notifications';
 
 import { useCard } from '../context/CardContext';
 import { isAuthenticationValid } from '../context/AuthContext';
-import { prompt_to_servers } from '../api';
+import { run_to_server } from '../api';
 
 import './server.css';
 
@@ -24,7 +24,7 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
         
         setIsLoading(true);
         appendLog({method:'command', data:[e.target.prompt_field.value]})
-        prompt_to_servers(
+        run_to_server(
             prop.server_name,
             e.target.prompt_field.value,
             (msg) => appendLog({method:'result', data:[msg.data]})
@@ -71,6 +71,7 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
           };
     }, [prop.server_name, prop.survival_check]);
     
+    
     return (
         <li >
             <div className={`py-2 inline cursor-pointer status ${status ? 'open' : 'dead'}`}
@@ -78,12 +79,14 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
                 onClick={handleClickEvent}>
                 {prop.server_name}
             </div>
+            {isAuthenticationValid() && (
             <div className="py-2 inline toggle-wrapper float-right">
                 <input type="checkbox" id={prop.server_name}  className="switch_body" checked={status ? true : false } />
                 <label for="switch" className="switch_label" onClick={()=>{setStatus(!!!status); console.log(prop.server_name);}}>
                     <span className="onf_btn"></span>
                 </label>
             </div>
+            )}
             {isOpened && (
                 <div className='console' id='console'>
                     <Console logs={logs} variant="light" />
