@@ -1,5 +1,5 @@
-import {post_login} from '../api.js';
-import {NotificationManager} from 'react-notifications';
+import { post_login } from '../api.js';
+import { NotificationManager } from 'react-notifications';
 import "./login.css";
 
 import { useAuth } from '../context/AuthContext.js';

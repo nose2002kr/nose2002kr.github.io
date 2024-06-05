@@ -1,37 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { Console } from 'console-feed' // https://www.npmjs.com/package/console-feed
+import { NotificationManager } from 'react-notifications';
 
-import { useAuth } from '../context/AuthContext';
+import { useCard } from '../context/CardContext';
+import { isAuthenticationValid } from '../context/AuthContext';
 import { prompt_to_servers } from '../api';
 
 import './server.css';
 
 const Server = ({prop, isOpened, handleClickEvent}) => {
     const [status, setStatus] = useState(false);
-    const [logs, setLogs] = useState([])
+    const [logs, setLogs] = useState([]);
+    const { setPhase } = useCard();
 
-    const appendLog = (log) => {
-        setLogs(
-            (pv) => [...pv, log]
-        )
-        document.querySelector("#console").scrollTo(0,document.body.scrollHeight)
-    }
+    const appendLog = (log) => setLogs((pv) => [...pv, log]);
+    useEffect(() => document.querySelector("#console")?.scrollTo(0,document.body.scrollHeight), [logs]);
+
+    const [isLoading, setIsLoading] = useState(false);
+    useEffect(() => document.querySelector("#prompt_field")?.focus(), [isLoading]);
 
     const onPrompt = (e) => {
         e.preventDefault();
-
+        
+        setIsLoading(true);
         appendLog({method:'command', data:[e.target.prompt_field.value]})
         prompt_to_servers(
             prop.server_name,
             e.target.prompt_field.value,
             (msg) => appendLog({method:'result', data:[msg.data]})
         )
-        .then(()=>alert('success :)'))
+        .then(()=> {
+            setIsLoading(false);
+        })
         .catch((e)=>{
-            alert('failure :(')
-            console.log(e)
-        }
-        );
+            if (e?.code === 1003) {
+                NotificationManager.error('로그인이 필요합니다.')
+                setPhase(2)
+            } else {
+                alert('failure :(')
+                console.log(e)
+            }
+            setIsLoading(false);
+        });
     }
 
     useEffect(() => {
@@ -50,9 +60,6 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
                 setLogs((prevLogs) =>
                     [ ...prevLogs,
                         status ? {method:'info', data:[`${prop.server_name} Server is active.`]} : {method:'warn', data:[`${prop.server_name} Server is down.`]},
-                        //{method:'command', data:[{fine:'thanks',hello:'world'}]},
-                        //{method:'result', data:[{well:'thanks',hello:'world'}]},
-            
                     ]
                 )
             })
@@ -63,8 +70,6 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
             clearInterval(interval)
           };
     }, [prop.server_name, prop.survival_check]);
-    
-    const {isAuthenticationValid} = useAuth();
     
     return (
         <li >
@@ -77,10 +82,16 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
             {isOpened && (
                 <div className='console' id='console'>
                     <Console logs={logs} variant="light" />
-                    {isAuthenticationValid && (
+                    {isAuthenticationValid() && (
                     <div className='prompt'>
                         <div className='prompt-cursor'/>
-                            <form  onSubmit={onPrompt}><input className='prompt-field' type='text' tabIndex='-1' id='prompt_field'/></form>
+                            <form  onSubmit={onPrompt} className='w100'>
+                            {isLoading ? (
+                                <div className='loading'/>
+                            ) : (
+                                <input className='prompt-field' type='text' tabIndex='-1' id='prompt_field'/>
+                            )}
+                            </form>
                     </div>
                     )}
                 </div>

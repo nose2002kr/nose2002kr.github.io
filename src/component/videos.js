@@ -9,7 +9,7 @@ const Videos = () => {
     useEffect(() => {
         get_videos()
         .then((e) => setVideos(e))
-        .catch(console.log("failed to fetch video lists"));
+        .catch((e) => console.log("failed to fetch video lists: " + e));
     }, []);
 
   return(

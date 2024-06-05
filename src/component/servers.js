@@ -13,7 +13,7 @@ const Servers = () => {
     useEffect(() => {
         get_servers()
         .then((e) => setServers(e))
-        .catch(console.log("failed to fetch server list"));
+        .catch((e) => console.log("failed to fetch server list: " + e));
     }, []);
     
     return (
