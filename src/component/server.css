@@ -46,6 +46,15 @@
 .w100 {
     width: 100%;
 }
+
+.inline {
+    display: inline-block;
+}
+
+.float-right {
+    float: right;
+}
+
 .prompt-field {
     border: none;
     background: none;
@@ -101,4 +110,58 @@
     animation-duration:         1.0s; 
     animation-iteration-count:  infinite;
     animation-timing-function: linear; 
+}
+
+.toggle-wrapper {
+    text-align: center;
+    height: 21px
+}
+.switch_body {
+    position: absolute;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.switch_label {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid rgb(167, 167, 209);
+    border-radius: 20px;
+    transition: 0.2s;
+}
+.switch_label:hover {
+    background: #efefef;
+}
+.onf_btn {
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 20px;
+    background: rgb(167, 167, 209);
+    transition: 0.2s;
+}
+
+/* checking style */
+.switch_body:checked+.switch_label {
+    background: rgb(72, 137, 223);
+    border: 2px solid rgb(72, 137, 223);
+}
+
+.switch_body:checked+.switch_label:hover {
+    background: rgb(94, 136, 226);
+}
+
+/* move */
+.switch_body:checked+.switch_label .onf_btn {
+    left: 21px;
+    background: #fff;
+    box-shadow: 1px 2px 3px #00000020;
 }

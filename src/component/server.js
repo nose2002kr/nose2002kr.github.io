@@ -73,11 +73,16 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
     
     return (
         <li >
-            <div
-            className={`py-2 items-center cursor-pointer status ${status ? 'open' : 'dead'}`}
-            id={prop.server_name}
-            onClick={handleClickEvent}>
-            {prop.server_name}
+            <div className={`py-2 inline cursor-pointer status ${status ? 'open' : 'dead'}`}
+                id={prop.server_name}
+                onClick={handleClickEvent}>
+                {prop.server_name}
+            </div>
+            <div className="py-2 inline toggle-wrapper float-right">
+                <input type="checkbox" id={prop.server_name}  className="switch_body" checked={status ? true : false } />
+                <label for="switch" className="switch_label" onClick={()=>{setStatus(!!!status); console.log(prop.server_name);}}>
+                    <span className="onf_btn"></span>
+                </label>
             </div>
             {isOpened && (
                 <div className='console' id='console'>
@@ -85,7 +90,7 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
                     {isAuthenticationValid() && (
                     <div className='prompt'>
                         <div className='prompt-cursor'/>
-                            <form  onSubmit={onPrompt} className='w100'>
+                            <form onSubmit={onPrompt} className='w100'>
                             {isLoading ? (
                                 <div className='loading'/>
                             ) : (
