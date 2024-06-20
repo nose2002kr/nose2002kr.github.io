@@ -133,7 +133,6 @@
 
 .switch_label {
     position: relative;
-    cursor: pointer;
     display: inline-block;
     width: 40px;
     height: 20px;
@@ -145,6 +144,14 @@
 .switch_label:hover {
     background: #efefef;
 }
+.switch_body:disabled+label{
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+.switch_body:enabled+label{
+    cursor: pointer;
+}
+
 .onf_btn {
     position: absolute;
     top: 2px;

@@ -70,8 +70,16 @@ export const turn_off_server = async (server) => {
     return new Promise((_, reject) => reject({code:403}));
   }
 
-  const response = await apiClient.get('/server/'+server+'/turn_off');
+  const response = await apiClient.post('/server/'+server+'/turn_off');
   return response.data;
 }
 
+export const turn_on_server = async (server) => {
+  if (!isAuthenticationValid()) {
+    return new Promise((_, reject) => reject({code:403}));
+  }
+
+  const response = await apiClient.post('/server/'+server+'/turn_on');
+  return response.data;
+}
 

@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Console } from 'console-feed' // https://www.npmjs.com/package/console-feed
-import { NotificationManager } from 'react-notifications';
+                                        // 'log' | 'debug' | 'info' | 'warn' | 'error' | 'table' | 'clear' | 'time' | 'timeEnd' | 'count' | 'assert' | 'command' | 'result' | 'dir'
 
-import { useCard } from '../context/CardContext';
-import { isAuthenticationValid } from '../context/AuthContext';
-import { run_to_server } from '../api';
+//import { isAuthenticationValid } from '../context/AuthContext';
+
+import { run_to_server, turn_off_server, turn_on_server } from '../api';
 
 import './server.css';
 
 const Server = ({prop, isOpened, handleClickEvent}) => {
     const [status, setStatus] = useState(false);
     const [logs, setLogs] = useState([]);
-    const { setPhase } = useCard();
 
     const appendLog = (log) => setLogs((pv) => [...pv, log]);
     useEffect(() => document.querySelector("#console")?.scrollTo(0,document.body.scrollHeight), [logs]);
@@ -56,11 +55,10 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
             .catch(() => status = false)
             .finally(() => {
                 setStatus(status)
-                setLogs((prevLogs) =>
-                    [ ...prevLogs,
-                        status ? {method:'info', data:[`${prop.server_name} Server is active.`]} : {method:'warn', data:[`${prop.server_name} Server is down.`]},
-                    ]
-                )
+                appendLog(status ?
+                    {method:'info', data:[`${prop.server_name} Server is active.`]} :
+                    {method:'warn', data:[`${prop.server_name} Server is down.`]}
+                );
             })
         let interval=setInterval(checkServer,60000);
         checkServer();
@@ -70,8 +68,32 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
           };
     }, [prop.server_name, prop.survival_check]);
     
-    const handleSwitchClickEvent = () => {
-
+    const handleSwitchClickEvent = e => {
+        if (document.getElementById(`${prop.server_name}_power`).disabled)
+            return;
+        
+        let remocon = status ? turn_off_server : turn_on_server;
+        let keepStatus = status;
+        setStatus(!!!keepStatus); 
+        document.getElementById(`${prop.server_name}_power`).disabled = true;
+        remocon(prop.server_name).then(e => {
+            if (!!!keepStatus) {
+                appendLog({method:'info', data:[`${prop.server_name} Server power switched on`]})
+            } else {
+                appendLog({method:'info', data:[`${prop.server_name} Server power switched off`]})
+            }
+        }).catch(e => {
+            setTimeout(() => { // For the visual effect.
+                if (e?.code === 1003) {
+                    appendLog({method:'error', data:['failed to switch power of the server, login required']})
+                } else {
+                    appendLog({method:'error', data:['failed to switch power of the server.']})
+                }
+                setStatus(keepStatus);
+            }, 100);
+        }).finally(() => {
+            document.getElementById(`${prop.server_name}_power`).disabled = false;
+        });
     }
 
     return (
@@ -84,8 +106,8 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
             {/* {isAuthenticationValid() && */
             (
             <div className="py-2 inline toggle-wrapper float-right">
-                <input type="checkbox" id={prop.server_name}  className="switch_body" checked={status ? true : false } />
-                <label for="switch" className="switch_label" onClick={()=>{setStatus(!!!status); console.log(prop.server_name);}}>
+                <input type="checkbox" id={`${prop.server_name}_power`}  className="switch_body" checked={status ? true : false } />
+                <label for="switch" className="switch_label" onClick={handleSwitchClickEvent}>
                     <span className="onf_btn"></span>
                 </label>
             </div>
