@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import Server from './server';
 import { get_servers } from '../api';
+import { isAuthenticationValid } from '../context/AuthContext';
+import './servers.css'
 
 const Servers = () => {
     const [servers, setServers] = useState(null);
@@ -17,7 +19,12 @@ const Servers = () => {
     }, []);
     
     return (
-    <ul>
+        <div>
+            {
+                !isAuthenticationValid() && (
+                    <p className='status-bar'>You haven't logged in, UI is displayed but your action is ignored</p>)
+            }
+        <ul>
         {
             servers !== null &&
             servers.map((server, idx) => (
@@ -28,7 +35,8 @@ const Servers = () => {
              />
             ))
         }
-    </ul>
+        </ul>
+    </div>
     )
 }
 

@@ -49,4 +49,5 @@ h4{
     position: absolute;
     width: inherit;
     height: inherit;
+    will-change: opacity;
   }

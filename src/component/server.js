@@ -34,10 +34,9 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
         })
         .catch((e)=>{
             if (e?.code === 1003) {
-                NotificationManager.error('로그인이 필요합니다.')
-                setPhase(2)
+                appendLog({method:'error', data:['failed to run command, login required']})
             } else {
-                alert('failure :(')
+                appendLog({method:'error', data:['failed to run command']})
                 console.log(e)
             }
             setIsLoading(false);
@@ -71,7 +70,10 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
           };
     }, [prop.server_name, prop.survival_check]);
     
-    
+    const handleSwitchClickEvent = () => {
+
+    }
+
     return (
         <li >
             <div className={`py-2 inline cursor-pointer status ${status ? 'open' : 'dead'}`}
@@ -79,7 +81,8 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
                 onClick={handleClickEvent}>
                 {prop.server_name}
             </div>
-            {isAuthenticationValid() && (
+            {/* {isAuthenticationValid() && */
+            (
             <div className="py-2 inline toggle-wrapper float-right">
                 <input type="checkbox" id={prop.server_name}  className="switch_body" checked={status ? true : false } />
                 <label for="switch" className="switch_label" onClick={()=>{setStatus(!!!status); console.log(prop.server_name);}}>
@@ -90,7 +93,7 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
             {isOpened && (
                 <div className='console' id='console'>
                     <Console logs={logs} variant="light" />
-                    {isAuthenticationValid() && (
+                    {/* {isAuthenticationValid() && */ (
                     <div className='prompt'>
                         <div className='prompt-cursor'/>
                             <form onSubmit={onPrompt} className='w100'>

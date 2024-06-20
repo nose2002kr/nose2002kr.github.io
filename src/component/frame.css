@@ -673,4 +673,5 @@ html {
   position: absolute;
   width: inherit;
   height: inherit;
+  will-change: opacity;
 }

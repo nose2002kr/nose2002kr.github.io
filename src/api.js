@@ -64,3 +64,14 @@ export const run_to_server = async (server, prompt, onmessage = undefined) => {
     socket.onerror = (err) => reject(err);
   });
 }
+
+export const turn_off_server = async (server) => {
+  if (!isAuthenticationValid()) {
+    return new Promise((_, reject) => reject({code:403}));
+  }
+
+  const response = await apiClient.get('/server/'+server+'/turn_off');
+  return response.data;
+}
+
+

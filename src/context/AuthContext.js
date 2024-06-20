@@ -17,6 +17,11 @@ const _useAuth = (authContext) => {
   const {authentication, setAuthentication} = useContext(authContext)
 
   const setAuthenticationToLocalStorage = (token) => {
+    if (token === null) {
+      localStorage.removeItem('access_token');
+      setAuthentication(null);
+      return;
+    }
     localStorage.setItem('access_token', token.access_token);
     setAuthentication(token);
   }
