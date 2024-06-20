@@ -4,7 +4,7 @@ import { Console } from 'console-feed' // https://www.npmjs.com/package/console-
 
 //import { isAuthenticationValid } from '../context/AuthContext';
 
-import { run_to_server, turn_off_server, turn_on_server } from '../api';
+import { run_to_server, status_server_power, turn_off_server, turn_on_server } from '../api';
 
 import './server.css';
 
@@ -76,12 +76,26 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
         let keepStatus = status;
         setStatus(!!!keepStatus); 
         document.getElementById(`${prop.server_name}_power`).disabled = true;
-        remocon(prop.server_name).then(e => {
-            if (!!!keepStatus) {
-                appendLog({method:'info', data:[`${prop.server_name} Server power switched on`]})
-            } else {
-                appendLog({method:'info', data:[`${prop.server_name} Server power switched off`]})
-            }
+        remocon(prop.server_name).then(() => {
+            let checkPowerStatus = setInterval(() => {
+                status_server_power(prop.server_name).then(e => {
+                    if (e.power_status === 'STOPPED') {
+                        appendLog({method:'info', data:[`${prop.server_name} Server power switched off`]})
+                        clearInterval(checkPowerStatus);
+                        document.getElementById(`${prop.server_name}_power`).disabled = false;
+                    } else if (e.power_status === 'STARTED') {
+                        appendLog({method:'info', data:[`${prop.server_name} Server power switched on`]})
+                        clearInterval(checkPowerStatus);
+                        document.getElementById(`${prop.server_name}_power`).disabled = false;
+                    }
+                }).catch(() => {
+                    clearInterval(checkPowerStatus);
+                    setStatus(keepStatus);
+                    appendLog({method:'error', data:['failed to switch power of the server.']})
+                    document.getElementById(`${prop.server_name}_power`).disabled = false;
+
+                });
+            }, 1000);
         }).catch(e => {
             setTimeout(() => { // For the visual effect.
                 if (e?.code === 1003) {
@@ -91,8 +105,6 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
                 }
                 setStatus(keepStatus);
             }, 100);
-        }).finally(() => {
-            document.getElementById(`${prop.server_name}_power`).disabled = false;
         });
     }
 

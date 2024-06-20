@@ -83,3 +83,12 @@ export const turn_on_server = async (server) => {
   return response.data;
 }
 
+export const status_server_power = async (server) => {
+  if (!isAuthenticationValid()) {
+    return new Promise((_, reject) => reject({code:403}));
+  }
+
+  const response = await apiClient.get('/server/'+server+'/status');
+  return response.data;
+}
+
