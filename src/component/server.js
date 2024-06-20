@@ -68,7 +68,7 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
           };
     }, [prop.server_name, prop.survival_check]);
     
-    const handleSwitchClickEvent = e => {
+    const handleSwitchClickEvent = () => {
         if (document.getElementById(`${prop.server_name}_power`).disabled)
             return;
         
@@ -97,13 +97,14 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
                 });
             }, 1000);
         }).catch(e => {
-            setTimeout(() => { // For the visual effect.
-                if (e?.code === 1003) {
+            setTimeout(e => { // For the visual effect.
+                if (e?.code === 403) {
                     appendLog({method:'error', data:['failed to switch power of the server, login required']})
                 } else {
                     appendLog({method:'error', data:['failed to switch power of the server.']})
                 }
                 setStatus(keepStatus);
+                document.getElementById(`${prop.server_name}_power`).disabled = false;
             }, 100);
         });
     }
