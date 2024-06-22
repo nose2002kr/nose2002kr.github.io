@@ -41,28 +41,28 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
             setIsLoading(false);
         });
     }
-
-    useEffect(() => {
+    
+    const checkServer = () => {
         let status = false;
-        const checkServer = () => 
-            fetch(prop.survival_check)
-            .then((e) => {
-                if (e.status === 200)
-                    status = true;
-                else 
-                    status = false;
-            })
-            .catch(() => status = false)
-            .finally(() => {
-                setStatus(status)
-                appendLog(status ?
-                    {method:'info', data:[`${prop.server_name} Server is active.`]} :
-                    {method:'warn', data:[`${prop.server_name} Server is down.`]}
-                );
-            })
+        fetch(prop.survival_check)
+        .then((e) => {
+            if (e.status === 200)
+                status = true;
+            else 
+                status = false;
+        })
+        .catch(() => status = false)
+        .finally(() => {
+            setStatus(status)
+            appendLog(status ?
+                {method:'info', data:[`${prop.server_name} Server is active.`]} :
+                {method:'warn', data:[`${prop.server_name} Server is down.`]}
+            );
+        });
+    }
+    useEffect(() => {
         let interval=setInterval(checkServer,60000);
         checkServer();
-        
         return () => {
             clearInterval(interval)
           };
@@ -72,21 +72,23 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
         if (document.getElementById(`${prop.server_name}_power`).disabled)
             return;
         
-        let remocon = status ? turn_off_server : turn_on_server;
+        let control = status ? turn_off_server : turn_on_server;
         let keepStatus = status;
         setStatus(!!!keepStatus); 
         document.getElementById(`${prop.server_name}_power`).disabled = true;
-        remocon(prop.server_name).then(() => {
+        control(prop.server_name).then(() => {
             let checkPowerStatus = setInterval(() => {
                 status_server_power(prop.server_name).then(e => {
                     if (e.power_status === 'STOPPED') {
                         appendLog({method:'info', data:[`${prop.server_name} Server power switched off`]})
                         clearInterval(checkPowerStatus);
                         document.getElementById(`${prop.server_name}_power`).disabled = false;
+                        checkServer();
                     } else if (e.power_status === 'STARTED') {
                         appendLog({method:'info', data:[`${prop.server_name} Server power switched on`]})
                         clearInterval(checkPowerStatus);
                         document.getElementById(`${prop.server_name}_power`).disabled = false;
+                        checkServer();
                     }
                 }).catch(() => {
                     clearInterval(checkPowerStatus);
