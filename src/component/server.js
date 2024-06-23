@@ -7,6 +7,7 @@ import { Console } from 'console-feed' // https://www.npmjs.com/package/console-
 import { run_to_server, status_server_power, turn_off_server, turn_on_server } from '../api';
 
 import './server.css';
+import { useCallback } from 'react';
 
 const Server = ({prop, isOpened, handleClickEvent}) => {
     const [status, setStatus] = useState(false);
@@ -42,7 +43,7 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
         });
     }
     
-    const checkServer = () => {
+    const checkServer = useCallback(() => {
         let status = false;
         fetch(prop.survival_check)
         .then((e) => {
@@ -59,14 +60,15 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
                 {method:'warn', data:[`${prop.server_name} Server is down.`]}
             );
         });
-    }
+    }, [prop.survival_check, prop.server_name]);
+
     useEffect(() => {
         let interval=setInterval(checkServer,60000);
         checkServer();
         return () => {
             clearInterval(interval)
           };
-    }, [prop.server_name, prop.survival_check]);
+    }, [checkServer, prop.server_name, prop.survival_check]);
     
     const handleSwitchClickEvent = () => {
         if (document.getElementById(`${prop.server_name}_power`).disabled)
