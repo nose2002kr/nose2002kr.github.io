@@ -78,9 +78,11 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
         let keepStatus = status;
         setStatus(!!!keepStatus); 
         document.getElementById(`${prop.server_name}_power`).disabled = true;
-        control(prop.server_name).then(() => {
+        control(prop.server_name).then(e => {
+            const requested_at = e.requested_at;
             let checkPowerStatus = setInterval(() => {
                 status_server_power(prop.server_name).then(e => {
+                    if (e.updated_at <= requested_at) return;
                     if (e.power_status === 'STOPPED') {
                         appendLog({method:'info', data:[`${prop.server_name} Server power switched off`]})
                         clearInterval(checkPowerStatus);
