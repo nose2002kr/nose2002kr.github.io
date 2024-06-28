@@ -1,4 +1,7 @@
 import './card.css'
+import Servers from './servers';
+import TechStack from './tech-stack';
+import Videos from './videos';
 
 const publicUrl = process.env.PUBLIC_URL;
 
@@ -40,14 +43,18 @@ const Card = () => {
             <div className='panel card_panel margin_top'>
             <div className='card' id='most_top_lang'/>
             <div className='card begie' id='most_3_lang'/>
-            <div className='card row_span' id='tech_stack'/>
+            <div className='card row_span' id='tech_stack'>
+                <TechStack/>
+                </div>
             
             <div className='card col_span' id='trend'/>
             <div className='card begie' id='profile'/>
-            <div className='card col_span' id='project'/>
-            
-            <div className='card col_span_2' id='server'/>
-            
+            <div className='card col_span' id='project'>
+                <Videos/>
+            </div>
+            <div className='card col_span_2' id='server'>
+                <Servers/>
+            </div>
             </div>
         </div>
     );
