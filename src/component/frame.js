@@ -64,7 +64,6 @@ const Frame = () => {
         <div className="text-gray-800 height-100 container" style={{opacity:"0"}}>
             <div className="mx-auto height-100">
                 <header className="flex items-center justify-between p-4 py-4 header" style={{ backgroundImage: `url(${publicUrl}/image.png)`, backgroundSize: 'cover', backgroundRepeat:'no-repeat' }}>
-                    <div></div>
                     <img src="https://avatars.githubusercontent.com/u/52348275?v=4" className="avatar avatar-user width-full border color-bg-default"
                     style={{ marginLeft: '60pt', marginBottom: '40pt', width:'auto', height:'100%'}} onClick={()=>window.location.href='https://github.com/nose2002kr'}
                     alt="avatar"/>

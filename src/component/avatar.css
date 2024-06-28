@@ -1,0 +1,27 @@
+.avatar-frame {
+    height:100%;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    width:100%
+}
+.avatar-user {
+    border-radius: 50% !important;
+    width:100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.18);
+    min-width: 100%;
+}
+.avatar-github {
+    font-size: 11pt;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-weight: 600;
+}
+.avatar-github-ci {
+    width: 17px;
+    height: 17px;
+    margin-right: 3px;
+}
+.vertical-center {
+    vertical-align: middle;
+}

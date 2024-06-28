@@ -2,6 +2,7 @@ import './card.css'
 import Servers from './servers';
 import TechStack from './tech-stack';
 import Videos from './videos';
+import Avatar from './avatar';
 
 const publicUrl = process.env.PUBLIC_URL;
 
@@ -48,11 +49,13 @@ const Card = () => {
                 </div>
             
             <div className='card col_span' id='trend'/>
-            <div className='card begie' id='profile'/>
-            <div className='card col_span' id='project'>
+            <div className='card begie' id='profile'>
+                <Avatar name='true'/>
+            </div>
+            <div className='card col_span night' id='project'>
                 <Videos/>
             </div>
-            <div className='card col_span_2' id='server'>
+            <div className='card col_span_2 night' id='server'>
                 <Servers/>
             </div>
             </div>
