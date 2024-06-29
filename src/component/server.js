@@ -115,6 +115,7 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
 
     return (
         <li >
+            <div className='server-item-header'>
             <div className={`py-2 inline cursor-pointer status ${status ? 'open' : 'dead'}`}
                 id={prop.server_name}
                 onClick={handleClickEvent}>
@@ -129,9 +130,10 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
                 </label>
             </div>
             )}
+            </div>
             {isOpened && (
                 <div className='console' id='console'>
-                    <Console logs={logs} variant="light" />
+                    <Console logs={logs} variant="dark" />
                     {/* {isAuthenticationValid() && */ (
                     <div className='prompt'>
                         <div className='prompt-cursor'/>
