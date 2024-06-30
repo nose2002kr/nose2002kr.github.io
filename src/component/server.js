@@ -115,15 +115,15 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
 
     return (
         <li >
-            <div className='server-item-header'>
-            <div className={`py-2 inline cursor-pointer status ${status ? 'open' : 'dead'}`}
+            <div className='server_item_header'>
+            <div className={`py-2 inline cursor_pointer status ${status ? 'open' : 'dead'}`}
                 id={prop.server_name}
                 onClick={handleClickEvent}>
                 {prop.server_name}
             </div>
             {/* {isAuthenticationValid() && */
             (
-            <div className="py-2 inline toggle-wrapper float-right">
+            <div className="py-2 inline toggle_wrapper float_right">
                 <input type="checkbox" id={`${prop.server_name}_power`}  className="switch_body" checked={status ? true : false } />
                 <label for="switch" className="switch_label" onClick={handleSwitchClickEvent}>
                     <span className="onf_btn"></span>
@@ -136,12 +136,12 @@ const Server = ({prop, isOpened, handleClickEvent}) => {
                     <Console logs={logs} variant="dark" />
                     {/* {isAuthenticationValid() && */ (
                     <div className='prompt'>
-                        <div className='prompt-cursor'/>
+                        <div className='prompt_cursor'/>
                             <form onSubmit={onPrompt} className='w100'>
                             {isLoading ? (
                                 <div className='loading'/>
                             ) : (
-                                <input className='prompt-field' type='text' tabIndex='-1' id='prompt_field' disabled={!status ? true : false}/>
+                                <input className='prompt_field' type='text' tabIndex='-1' id='prompt_field' disabled={!status ? true : false}/>
                             )}
                             </form>
                     </div>

@@ -44,17 +44,18 @@ const Card = () => {
             <div className='panel card_panel margin_top'>
             <div className='card' id='most_top_lang'/>
             <div className='card begie' id='most_3_lang'/>
-            <div className='card row_span' id='tech_stack'>
+            <div className='card row_span night' id='tech_stack'>
                 <TechStack/>
-                </div>
+            </div>
             
             <div className='card col_span' id='trend'/>
             <div className='card begie' id='profile'>
                 <Avatar name='true'/>
             </div>
-            <div className='card col_span night' id='project'>
+            <div className='card col_span row_span night' id='project'>
                 <Videos/>
             </div>
+            <div className='card empty_card' id='empty'></div>
             <div className='card col_span_2 night' id='server'>
                 <Servers/>
             </div>

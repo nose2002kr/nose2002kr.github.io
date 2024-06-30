@@ -38,6 +38,13 @@ body {
     margin-top: 10px;
 }
 
+.margin_bottom_small {
+    margin-top: 3px;
+}
+.text_align_left {
+    text-align: left;
+}
+
 .menu_decorator {
     height: 25px;
     display: block;
@@ -169,14 +176,18 @@ ul {
     color: white;
 }
 
-.card-title {
+.card_title {
     font-size: 20pt;
     font-family: 'Roboto', sans-serif;
 }
 
-.no-text-wrap {
+.no_text_wrap {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.empty_card {
+    background-image: radial-gradient(at 10px 10px, var(--silver-foil-gray), var(--silver-foil-gray) 25%, var(--gunmetal-blue) 55%);
+    background-size: 10px 10px;
 }
 /* --------------------------- */

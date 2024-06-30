@@ -1,4 +1,4 @@
-.avatar-frame {
+.avatar_frame {
     height:100%;
     box-sizing: border-box;
     padding-left: 5%;
@@ -7,14 +7,14 @@
     padding-top: 10%;
     padding-bottom: 10%;
 }
-.avatar-user {
+.avatar_user {
     border-radius: 25px;
     width:50%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.18);
     min-width: 100px;
     object-fit: cover;
 }
-.avatar-desc {
+.avatar_desc {
     font-size: 10pt;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     font-weight: 600;
@@ -24,11 +24,11 @@
     flex-direction: column;
     justify-content: space-between;
 }
-.avatar-github-ci {
+.avatar_github_ci {
     width: 17px;
     height: 17px;
     margin-right: 3px;
 }
-.vertical-center {
+.vertical_center {
     vertical-align: middle;
 }

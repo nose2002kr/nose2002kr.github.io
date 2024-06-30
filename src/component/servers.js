@@ -19,10 +19,12 @@ const Servers = () => {
     }, []);
     
     return (
+        
         <div>
+            <h1 className='text_align_left'>Servers</h1>
             {
                 !isAuthenticationValid() && (
-                    <p className='status-bar'>You haven't logged in, UI is displayed but your action will be ignored</p>)
+                    <p className='status_bar'>You haven't logged in, UI is displayed but your action will be ignored</p>)
             }
         <ul>
         {

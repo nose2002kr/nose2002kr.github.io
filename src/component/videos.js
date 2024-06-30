@@ -14,19 +14,19 @@ const Videos = () => {
 
   return(
     <div>
+      <h1>Project</h1>
       {videos !== null &&
         videos.map((project, index) => (
-        <div key={index} className="mb-4">
+        <div key={index} className="text_align_left">
           <Tooltip title={project.description}>
             <h2 className="text-xl font-bold fit-width">{project.project_name}</h2>
           </Tooltip>
-          <div className="bg-gray-200 p-4 mb-2">
-          <iframe width="100%" height="300px"
+          <iframe 
+           className='video'
            title={project.project_name} src={project.video_link} 
            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
            referrerPolicy="strict-origin-when-cross-origin"
-           allowFullScreen></iframe>
-          </div>
+           allowFullScreen/>
         </div>
       ))}
     </div>

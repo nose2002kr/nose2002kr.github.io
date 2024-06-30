@@ -36,7 +36,9 @@ const TechStack = () => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
             }
-            const data = await response.text();
+            let data = await response.text();
+            data = data.substring(data.indexOf('## 💻Tech Stack '), data.indexOf('### 🧐'));
+            console.log(data)
             setMarkdown(data);
           } catch (error) {
             console.error('There has been a problem with your fetch operation:', error);
