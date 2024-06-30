@@ -187,7 +187,11 @@ ul {
     text-overflow: ellipsis;
 }
 .empty_card {
-    background-image: radial-gradient(at 10px 10px, var(--silver-foil-gray), var(--silver-foil-gray) 25%, var(--gunmetal-blue) 55%);
-    background-size: 10px 10px;
+    /* background-image: radial-gradient(at 10px 10px, var(--silver-foil-gray), var(--silver-foil-gray) 25%, var(--silver-foil-gray) 55%); */
+    /* background-size: 10px 10px; */
+
+    opacity: 0.8;
+    background-image: radial-gradient(var(--silver-foil-gray) 0.5px, var(--gunmetal-blue) 0.5px);
+    background-size: 7px 7px;
 }
 /* --------------------------- */
