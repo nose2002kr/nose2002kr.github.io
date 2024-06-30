@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 
-import './frame.css';
 import Markdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
+
+import './tech-stack.css';
 
 const TooltipWrapper = ({ children, title }) => (
   <Tooltip title={title}>
@@ -49,7 +50,7 @@ const TechStack = () => {
       }, []);
 
     return (
-        <div>
+        <div id='tech_stack'>
         {markdown ? <MarkdownRenderer markdown={markdown} />: <p/>}
          
         </div>
