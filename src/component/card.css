@@ -123,6 +123,10 @@ ul {
     background-color: var(--picton-blue);
 }
 
+.gray {
+    background-color: var(--silver-foil-gray);
+}
+
 .mini_slide_switch {
     background-color: var(--UCLA-blue);
     width: 30px;
@@ -179,6 +183,10 @@ ul {
     grid-auto-rows: 180px;
     row-gap: 10px;
     column-gap: 10px;
+    height: 100%;
+}
+
+.h100 {
     height: 100%;
 }
 

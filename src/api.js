@@ -92,3 +92,13 @@ export const status_server_power = async (server) => {
   return response.data;
 }
 
+export const get_most_lang = async () => {
+  const response = await apiClient.get('/github_rank/top3');
+  return response.data;
+}
+
+export const get_most_lang_svg = async () => {
+  const response = await apiClient.get('/github_rank/top/svg');
+  return response.data;
+}
+

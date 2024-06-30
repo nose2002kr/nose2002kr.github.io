@@ -3,6 +3,7 @@ import Servers from './servers';
 import TechStack from './tech-stack';
 import Videos from './videos';
 import Avatar from './avatar';
+import MostLanguage from './most-lang';
 
 const publicUrl = process.env.PUBLIC_URL;
 
@@ -42,7 +43,9 @@ const Card = () => {
             </div>
 
             <div className='panel card_panel margin_top'>
-            <div className='card' id='most_top_lang'/>
+            <div className='card night' id='most_top_lang'>
+                <MostLanguage/>
+            </div>
             <div className='card begie' id='most_3_lang'/>
             <div className='card row_span night' id='tech_stack'>
                 <TechStack/>

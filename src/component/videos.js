@@ -29,6 +29,9 @@ const Videos = () => {
            allowFullScreen/>
         </div>
       ))}
+      <div id='page'>
+        <div className='circle_10px gray'/>
+      </div>
     </div>
   )
 };
