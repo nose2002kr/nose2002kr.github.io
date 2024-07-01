@@ -6,8 +6,12 @@
     align-content: center;
 }
 
-#most_lang_desc
-#most_lang_placehoder {
+#most_lang_desc,
+#most_lang_placeholder {
     height: 100%;
     align-content: center;
+}
+
+#most_lang_placeholder {
+    display: none;
 }
