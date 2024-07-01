@@ -49,7 +49,7 @@ const TechStack = () => {
       }, []);
 
     return (
-        <div id='tech_stack'>
+        <div id='tech_stack_placeholder'>
         {markdown ? <MarkdownRenderer markdown={markdown} />: <p/>}
          
         </div>

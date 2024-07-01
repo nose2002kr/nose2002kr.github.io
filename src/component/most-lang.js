@@ -38,7 +38,8 @@ export const Top3Language = () => {
                 console.log("The value: ", v)
                 console.log("index: ", i)
                 document.getElementById(`top${i+1}`).children[0].innerHTML = k +': ';
-                document.getElementById(`top${i+1}`).children[1].innerHTML = v;
+                //document.getElementById(`top${i+1}`).children[1].innerHTML = v;
+                document.getElementById(`top${i+1}`).children[1].style.setProperty('--num', v);
             })
         });
     }, []);
@@ -48,16 +49,16 @@ export const Top3Language = () => {
             <div className="card_title text_align_left">Favorite Languages</div>
             <div className="text_align_left">
                 <div id="top1">
-                    <span></span>
-                    <span></span>
+                    <span className="lang_name"></span>
+                    <span className="lang_used"></span>
                 </div>
                 <div id="top2">
-                    <span></span>
-                    <span></span>
+                    <span className="lang_name"></span>
+                    <span className="lang_used"></span>
                 </div>
                 <div id="top3">
-                    <span></span>
-                    <span></span>
+                    <span className="lang_name"></span>
+                    <span className="lang_used"></span>
                 </div>
             </div>
         </div>

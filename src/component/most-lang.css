@@ -14,4 +14,24 @@
 
 #most_lang_placeholder {
     display: none;
+    font-size: 20pt;
+}
+.lang_name{
+    min-width: 60px;
+    display: inline-block;
+}
+
+@property --num {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+}
+  
+.lang_used {
+    transition: --num 2s;
+    counter-set: num var(--num);
+}
+
+.lang_used:after {
+    content: counter(num);
 }
