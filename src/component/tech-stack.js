@@ -39,7 +39,6 @@ const TechStack = () => {
             }
             let data = await response.text();
             data = data.substring(data.indexOf('## 💻Tech Stack '), data.indexOf('### 🧐'));
-            console.log(data)
             setMarkdown(data);
           } catch (error) {
             console.error('There has been a problem with your fetch operation:', error);
