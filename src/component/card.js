@@ -6,8 +6,6 @@ import TechStack from './tech-stack';
 import Videos from './videos';
 import Avatar from './avatar';
 import MostLanguage, { Top3Language } from './most-lang';
-//import { LangChart } from 'githut2/src/components/LangChart';
-import { Button } from '../../githut/src/components/Button';
 
 const publicUrl = process.env.PUBLIC_URL;
 
@@ -58,7 +56,6 @@ const Card = () => {
             </div>
             
             <div className='card col_span' id='trend'>
-                <Button/>
             </div>
             <div className='card begie' id='profile'>
                 <Avatar name='true'/>
