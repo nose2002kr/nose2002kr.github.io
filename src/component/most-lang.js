@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { get_most_lang, get_most_lang_svg } from "../api";
 
 import "./most-lang.css";

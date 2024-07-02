@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 
 import './videos.css';
@@ -15,7 +15,7 @@ const Videos = () => {
   return(
     <div>
       <h1>Project</h1>
-      {videos !== null &&
+      {videos !== null ?
         videos.map((project, index) => (
         <div key={index} className="text_align_left">
           <Tooltip title={project.description}>
@@ -28,7 +28,7 @@ const Videos = () => {
            referrerPolicy="strict-origin-when-cross-origin"
            allowFullScreen/>
         </div>
-      ))}
+      )) : (<div>loading...</div>)}
       <div id='page'>
         <div className='circle_10px gray'/>
       </div>
