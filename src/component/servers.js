@@ -21,7 +21,7 @@ const Servers = () => {
     return (
         
         <div className='text_align_left'>
-            <h1>Servers</h1>
+            <h1>Server</h1>
             {
                 !isAuthenticationValid() && (
                     <p className='status_bar'>You haven't logged in, UI is displayed but your action will be ignored</p>)
