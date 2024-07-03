@@ -10,7 +10,8 @@ import 'react-notifications/lib/notifications.css';
 import { setupWorker } from 'msw/browser'
 import { handlers } from './api_mock'
 import Footer from './component/footer';
- 
+import GoToTop from './component/GoToTop';
+
 if (process.env.NODE_ENV === 'development') {
 	console.log(process.env.NODE_ENV)
 	const worker = setupWorker(...handlers)
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 function App() {
   return (
     	<div className='App'>
+		<GoToTop/>
 		<CardContextProvider>
 		<AuthContextProvider>
 			<BrowserRouter>

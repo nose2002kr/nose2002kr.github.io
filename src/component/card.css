@@ -35,6 +35,7 @@ pre {
 html {
   line-height: 1.5;
   text-align: center;
+  scroll-behavior: smooth;
 }
 
 menu,
@@ -138,7 +139,12 @@ ul {
 .menu {
     display: flex;
     justify-content: space-around;
-    height: 50px
+    height: 50px;
+    width: 100%;
+}
+
+.menu>ul {
+    cursor: pointer;
 }
 
 .photo {
@@ -242,5 +248,11 @@ ul {
 .py_2 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-  }
+}
+
+:target {
+    /* animation: flicker 1s ease-in-out forwards; */
+    outline: 2px solid pink;
+}
+
 /* --------------------------- */

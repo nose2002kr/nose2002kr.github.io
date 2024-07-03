@@ -28,13 +28,13 @@ const Card = () => {
                 </div>
                 
                 <li className='menu'>
-                    <ul>About Me</ul>
-                    <ul>Tech</ul>
-                    <ul>Project</ul>
-                    <ul>Server</ul>
+                    <ul onClick={() => document.location.href='#about_me'}>About Me</ul>
+                    <ul onClick={() => document.location.href='#tech_stack'}>Tech stack</ul>
+                    <ul onClick={() => document.location.href='#project'}>Project</ul>
+                    <ul onClick={() => document.location.href='#server'}>Server</ul>
                 </li>
                 <div className='photo' style={{ backgroundImage: `url(${publicUrl}/banner.png)`}}/>
-                <div className='about_me'>
+                <div className='about_me' id='about_me'>
                     <div className='left'>
                         <div className='title'>About Me</div>
                         <div className='content'>
