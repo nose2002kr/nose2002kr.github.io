@@ -9,6 +9,7 @@ import 'react-notifications/lib/notifications.css';
 
 import { setupWorker } from 'msw/browser'
 import { handlers } from './api_mock'
+import Footer from './component/footer';
  
 if (process.env.NODE_ENV === 'development') {
 	console.log(process.env.NODE_ENV)
@@ -31,6 +32,7 @@ function App() {
 		</AuthContextProvider>
 		</CardContextProvider>
 		<NotificationContainer/>
+		<Footer/>
 		</div>
   );
 }

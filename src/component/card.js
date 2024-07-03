@@ -12,28 +12,6 @@ const publicUrl = process.env.PUBLIC_URL;
 
 const Card = () => {
 
-    const removeAllExcept = (self) => {
-         // 선택한 요소를 찾기
-        var elementToKeep = self;
-        console.log(self)
-        // 선택한 요소의 부모 요소
-        var parent = elementToKeep.parentElement;
-        // 부모 요소의 모든 자식 요소를 반복
-        while (parent.firstChild) {
-            // 현재 자식 요소가 선택한 요소인 경우 건너뜀
-            if (parent.firstChild === elementToKeep) {
-            parent = elementToKeep;  // 선택한 요소의 부모로 다시 설정
-            elementToKeep = null;    // 선택한 요소를 null로 설정하여 다시 반복하지 않도록 함
-            } else {
-            // 선택한 요소가 아닌 경우 제거
-            parent.removeChild(parent.firstChild);
-            }
-        }
-        if (self.nodeName.toLowerCase() !== 'iframe') {
-            removeAllExcept(parent);
-        }
-    }
-
     return (
         <div className='frame' id='frame'>
             <div className='panel upper_panel'>
@@ -60,7 +38,8 @@ const Card = () => {
                     <div className='left'>
                         <div className='title'>About Me</div>
                         <div className='content'>
-                            Hi Hi Hi Welcome, welcome everyone
+                            Hi welcome 👋,  <br/>
+                            I'm a software developer who develop what I want.
                         </div>
                     </div>
                     <div className='title title_name'>Kyoung Sub</div>
