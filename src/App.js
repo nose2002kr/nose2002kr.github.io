@@ -10,7 +10,7 @@ import 'react-notifications/lib/notifications.css';
 import { setupWorker } from 'msw/browser'
 import { handlers } from './api_mock'
 import Footer from './component/footer';
-import GoToTop from './component/GoToTop';
+import GoToTop from './component/go-to-top';
 
 if (process.env.NODE_ENV === 'development') {
 	console.log(process.env.NODE_ENV)
