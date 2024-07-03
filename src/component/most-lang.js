@@ -12,19 +12,21 @@ export const MostLanguage = () => {
 
     useEffect(() => {
         get_most_lang().then((data) => {
-            document.getElementById("most_lang_desc").innerHTML = "";
-            document.getElementById("most_lang_desc").style.display = "none";
+            // document.getElementById("most_lang_desc").innerHTML = "";
+            document.getElementById("most_lang_desc").style.opacity = 0;
             document.getElementById("most_lang_placeholder").innerHTML = Object.keys(data)[0];
-            document.getElementById("most_lang_placeholder").style.display = "block";
+            document.getElementById("most_lang_placeholder").style.opacity = 1.0
             
         });
     });
 
     return (
-        <div className="h100">
+        <div className="most_lang">
             <div id="svg_placeholder"></div>
-            <div id="most_lang_desc">Most used language</div>
-            <div id="most_lang_placeholder"></div>
+            <div className="most_lang_box">
+                <div id="most_lang_desc">Most used language</div>
+                <div id="most_lang_placeholder"></div>
+            </div>
         </div>
     )
 }
