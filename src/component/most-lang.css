@@ -3,12 +3,13 @@
     flex-direction: row;
     justify-content: flex-start;
     height: 100%;
+    align-items: center;
 }
 
 #svg_placeholder {
     width: 50% !important;
     min-width: 50%;
-    height: 100%;
+    height: fit-content;
     padding-left: 10%;
     align-content: center;
 }

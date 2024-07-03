@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { get_most_lang, get_most_lang_svg } from "../api";
+import Tooltip from '@mui/material/Tooltip';
 
 import "./most-lang.css";
 
@@ -22,7 +23,9 @@ export const MostLanguage = () => {
 
     return (
         <div className="most_lang">
+            <Tooltip title="가장 자주 사용한 언어😎">
             <div id="svg_placeholder"></div>
+            </Tooltip>
             <div className="most_lang_box">
                 <div id="most_lang_desc">Most used language</div>
                 <div id="most_lang_placeholder"></div>
@@ -32,16 +35,7 @@ export const MostLanguage = () => {
 }
 
 export const Top3Language = () => {
-    useEffect(() => {
-        get_most_lang().then((data) => {
-            
-            Object.entries(data).forEach(([k,v], i) => {
-                document.getElementById(`top${i+1}`).children[0].innerHTML = k +': ';
-                animateValue(document.getElementById(`top${i+1}`).children[1], 0, v, 2000);
-            })
-        });
-    }, []);
-
+    
     function easeOutQuad(t) {
         return 1 - Math.pow((1 - t), 4);
     }
@@ -50,7 +44,7 @@ export const Top3Language = () => {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' bytes';
     }
     
-    function animateValue(element, start, end, duration) {
+    const animateValue = useCallback((element, start, end, duration) =>  {
         let startTime = null;
         
         function animation(currentTime) {
@@ -68,7 +62,18 @@ export const Top3Language = () => {
         }
         
         requestAnimationFrame(animation);
-    }
+    }, []);
+
+
+    useEffect(() => {
+        get_most_lang().then((data) => {
+            
+            Object.entries(data).forEach(([k,v], i) => {
+                document.getElementById(`top${i+1}`).children[0].innerHTML = k +': ';
+                animateValue(document.getElementById(`top${i+1}`).children[1], 0, v, 2000);
+            })
+        });
+    }, [animateValue]);
 
     
     return (
