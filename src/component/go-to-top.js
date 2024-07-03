@@ -2,7 +2,7 @@ import React from 'react'
 import Fab from '@mui/material/Fab';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
-import './GoToTop.css';
+import './go-to-top.css';
 
 const GoToTop = () => {
 	return (
