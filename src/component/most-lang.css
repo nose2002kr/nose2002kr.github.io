@@ -46,7 +46,7 @@
 }
   
 .lang_used {
-    transition: --num 2s;
+    transition: --num 0.8s;
     counter-set: num var(--num);
 }
 
