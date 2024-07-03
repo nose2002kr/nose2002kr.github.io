@@ -36,11 +36,7 @@ export const Top3Language = () => {
         get_most_lang().then((data) => {
             
             Object.entries(data).forEach(([k,v], i) => {
-                console.log("The key: ", k)
-                console.log("The value: ", v)
-                console.log("index: ", i)
                 document.getElementById(`top${i+1}`).children[0].innerHTML = k +': ';
-                //document.getElementById(`top${i+1}`).children[1].innerHTML = v;
                 document.getElementById(`top${i+1}`).children[1].style.setProperty('--num', v);
             })
         });
