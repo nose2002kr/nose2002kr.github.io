@@ -222,6 +222,7 @@ ul {
 .card_title {
     font-size: 20pt;
     font-family: 'Roboto', sans-serif;
+    font-weight: 700;
 }
 
 .no_text_wrap {

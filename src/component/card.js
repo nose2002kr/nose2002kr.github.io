@@ -6,10 +6,33 @@ import TechStack from './tech-stack';
 import Videos from './videos';
 import Avatar from './avatar';
 import MostLanguage, { Top3Language } from './most-lang';
+import ComingSoon from './coming-soon';
 
 const publicUrl = process.env.PUBLIC_URL;
 
 const Card = () => {
+
+    const removeAllExcept = (self) => {
+         // 선택한 요소를 찾기
+        var elementToKeep = self;
+        console.log(self)
+        // 선택한 요소의 부모 요소
+        var parent = elementToKeep.parentElement;
+        // 부모 요소의 모든 자식 요소를 반복
+        while (parent.firstChild) {
+            // 현재 자식 요소가 선택한 요소인 경우 건너뜀
+            if (parent.firstChild === elementToKeep) {
+            parent = elementToKeep;  // 선택한 요소의 부모로 다시 설정
+            elementToKeep = null;    // 선택한 요소를 null로 설정하여 다시 반복하지 않도록 함
+            } else {
+            // 선택한 요소가 아닌 경우 제거
+            parent.removeChild(parent.firstChild);
+            }
+        }
+        if (self.nodeName.toLowerCase() !== 'iframe') {
+            removeAllExcept(parent);
+        }
+    }
 
     return (
         <div className='frame' id='frame'>
@@ -55,7 +78,9 @@ const Card = () => {
                 <TechStack/>
             </div>
             
-            <div className='card col_span' id='trend'>
+            <div className='card col_span empty_card' id='trend'>
+                <ComingSoon/>
+                {/* <iframe src='https://madnight.github.io/githut/#/pull_requests/2024/1' onLoad={() => removeAllExcept(document.querySelector('.highcharts-root'))}></iframe> */}
             </div>
             <div className='card begie' id='profile'>
                 <Avatar name='true'/>
@@ -63,7 +88,9 @@ const Card = () => {
             <div className='card col_span row_span night' id='project'>
                 <Videos/>
             </div>
-            <div className='card empty_card' id='empty'></div>
+            <div className='card empty_card' id='empty'>
+                <ComingSoon/>
+            </div>
             <div className='card col_span_2 night' id='server'>
                 <Servers/>
             </div>
