@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { get_most_lang, get_most_lang_svg } from "../api";
 import Tooltip from '@mui/material/Tooltip';
 
@@ -36,6 +36,10 @@ export const MostLanguage = () => {
 
 export const Top3Language = () => {
     
+    const [ top1Usage, setTop1Usage ] = useState([]);
+    const [ top2Usage, setTop2Usage ] = useState([]);
+    const [ top3Usage, setTop3Usage ] = useState([]);
+
     function easeOutQuad(t) {
         return 1 - Math.pow((1 - t), 4);
     }
@@ -52,9 +56,7 @@ export const Top3Language = () => {
             let timeElapsed = currentTime - startTime;
             let progress = Math.min(timeElapsed / duration, 1);
             progress = easeOutQuad(progress);
-            console.log(progress)
             let value = Math.floor(start + (end - start) * progress);
-            console.log(value)
             element.innerText = formatNumberWithCommas(value);
             if (timeElapsed < duration) {
                 requestAnimationFrame(animation);
@@ -67,32 +69,43 @@ export const Top3Language = () => {
 
     useEffect(() => {
         get_most_lang().then((data) => {
-            
+            const setUsage = [setTop1Usage, setTop2Usage, setTop3Usage];
             Object.entries(data).forEach(([k,v], i) => {
                 document.getElementById(`top${i+1}`).children[0].innerHTML = k +': ';
-                animateValue(document.getElementById(`top${i+1}`).children[1], 0, v, 2000);
+                animateValue(document.getElementById(`top${i+1}`).children[1], 0, v['bytes'], 2000);
+                setUsage[i](
+                    [
+                        v['biggest_project'], 
+                        (v['bytes_of_the_biggest_project'] / v['bytes'] * 100).toFixed(2) + '%'
+                    ]
+                );
             })
         });
     }, [animateValue]);
-
     
     return (
         <div className="h100">
             <div className="card_title text_align_left">Favorite Languages</div>
-            <div className="text_align_left">
+            <div className="rank">
+                <Tooltip title={"이 언어는 주로 " + top1Usage[0] + " 프로젝트에서 " + top1Usage[1] + " 만큼 사용하였습니다."} placement="right-start">
                 <div id="top1">
                     <span className="lang_name"></span>
                     <span className="lang_used"></span>
                 </div>
+                </Tooltip>
+                <Tooltip title={"이 언어는 주로 " + top2Usage[0] + " 프로젝트에서 " + top2Usage[1] + " 만큼 사용하였습니다."} placement="right-start">
                 <div id="top2">
                     <span className="lang_name"></span>
                     <span className="lang_used"></span>
                 </div>
+                </Tooltip>
+                <Tooltip title={"이 언어는 주로 " + top3Usage[0] + " 프로젝트에서 " + top3Usage[1] + " 만큼 사용하였습니다."} placement="right-start">
                 <div id="top3">
                     <span className="lang_name"></span>
                     <span className="lang_used"></span>
                 </div>
-            </div>
+                </Tooltip>
+                </div>
         </div>
     )
 }

@@ -40,11 +40,7 @@
     display: inline-block;
 }
 
-@property --num {
-    syntax: "<integer>";
-    initial-value: 0;
-    inherits: false;
-}
-  
-.lang_used {
+.rank {
+    width: fit-content;
+    text-align: left;
 }
