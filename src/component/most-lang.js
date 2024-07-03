@@ -37,11 +37,40 @@ export const Top3Language = () => {
             
             Object.entries(data).forEach(([k,v], i) => {
                 document.getElementById(`top${i+1}`).children[0].innerHTML = k +': ';
-                document.getElementById(`top${i+1}`).children[1].style.setProperty('--num', v);
+                animateValue(document.getElementById(`top${i+1}`).children[1], 0, v, 2000);
             })
         });
     }, []);
 
+    function easeOutQuad(t) {
+        return 1 - Math.pow((1 - t), 4);
+    }
+    
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' bytes';
+    }
+    
+    function animateValue(element, start, end, duration) {
+        let startTime = null;
+        
+        function animation(currentTime) {
+            if (!startTime) startTime = currentTime;
+            let timeElapsed = currentTime - startTime;
+            let progress = Math.min(timeElapsed / duration, 1);
+            progress = easeOutQuad(progress);
+            console.log(progress)
+            let value = Math.floor(start + (end - start) * progress);
+            console.log(value)
+            element.innerText = formatNumberWithCommas(value);
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            }
+        }
+        
+        requestAnimationFrame(animation);
+    }
+
+    
     return (
         <div className="h100">
             <div className="card_title text_align_left">Favorite Languages</div>

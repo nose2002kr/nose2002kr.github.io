@@ -46,10 +46,4 @@
 }
   
 .lang_used {
-    transition: --num 0.8s;
-    counter-set: num var(--num);
-}
-
-.lang_used:after {
-    content: counter(num);
 }
