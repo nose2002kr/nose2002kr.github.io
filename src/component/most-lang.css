@@ -1,0 +1,55 @@
+.most_lang {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+#svg_placeholder {
+    width: 50% !important;
+    min-width: 50%;
+    height: 100%;
+    padding-left: 10%;
+    align-content: center;
+}
+
+.most_lang_box {
+    display: block;
+    width: 50%;
+    height: 100%;
+    translate: 50% 50%;
+}
+
+#most_lang_desc,
+#most_lang_placeholder {
+    /* height: 100%; */
+    align-content: center;
+    display: block;
+    position: absolute;
+    translate: -50% -50%;
+    transition: 0.3s;
+}
+
+#most_lang_placeholder {
+    opacity: 0;
+    font-size: 20pt;
+}
+.lang_name{
+    min-width: 60px;
+    display: inline-block;
+}
+
+@property --num {
+    syntax: "<integer>";
+    initial-value: 0;
+    inherits: false;
+}
+  
+.lang_used {
+    transition: --num 2s;
+    counter-set: num var(--num);
+}
+
+.lang_used:after {
+    content: counter(num);
+}

@@ -1,9 +1,4 @@
-.font-bold {
-font-weight: 700;
-}
-.text-xl {
-    text-align: left;
-}
-.fit-width {
-    width: fit-content;
+.video {
+    width: 100%;
+    height: 240px;
 }

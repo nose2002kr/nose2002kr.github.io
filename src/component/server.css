@@ -6,7 +6,7 @@
     box-shadow: 0px 0px 4px 1px #94E185;
   }
 
-  &.in-progress:before {
+  &.in_progress:before {
     background-color: #FFC182;
     border-color: #FFB161;
     box-shadow: 0px 0px 4px 1px #FFC182;
@@ -51,27 +51,25 @@
     display: inline-block;
 }
 
-.float-right {
+.float_right {
     float: right;
 }
 
-.prompt-field {
+.prompt_field {
     border: none;
     background: none;
     width: 100%;
     outline: none;
     font-size: 12px;
 }
-.prompt-field:disabled {
+.prompt_field:disabled {
     background-color: #ffffff;
     opacity: 0.8;
     background-size: 7px 7px;
     background-image: repeating-linear-gradient(-45deg, #cecece 0, #cecece 1px, #ffffff 0, #ffffff 50%);
 }
 
-
-
-.prompt-cursor {
+.prompt_cursor {
     width: 0.8em;
     height: 0.8em;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABaSURBVChTY6AtmDx5cvnUqVP1oFzsoL+/XwCo8DEQv584caIVVBg7mDBhghxQ4Y2+vr6vU6ZM8YAKYwdA00SB+CxQ8S+g4jCoMCYgSiFRVpPkGaAiHMHDwAAA5Ko+F4/l6+MAAAAASUVORK5CYII=);
@@ -120,7 +118,7 @@
     animation-timing-function: linear; 
 }
 
-.toggle-wrapper {
+.toggle_wrapper {
     text-align: center;
     height: 21px
 }
@@ -179,4 +177,11 @@
     left: 21px;
     background: #fff;
     box-shadow: 1px 2px 3px #00000020;
+}
+
+.server_item_header {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
 }
