@@ -7,11 +7,11 @@ import "./error.css";
 
 export const MostLanguage = () => {
     const [error, setError] = useState(null);
-
+    
     useEffect(() => {
         get_most_lang_svg().then((data) => {
             document.getElementById("svg_placeholder").innerHTML = data;
-        });
+        }).catch((e) => console.log("failed to fetch most_lang_svg: " + e));
     }, []);
 
     useEffect(() => {
@@ -20,7 +20,8 @@ export const MostLanguage = () => {
             document.getElementById("most_lang_desc").style.opacity = 0;
             document.getElementById("most_lang_placeholder").innerHTML = Object.keys(data)[0];
             document.getElementById("most_lang_placeholder").style.opacity = 1.0
-        }).catch(() => {
+        }).catch((err) => {
+            console.log("failed to fetch most lang: " + err)
             setError(true);
         });
     });
@@ -93,7 +94,8 @@ export const Top3Language = () => {
                     ]
                 );
             })
-        }).catch(() => {
+        }).catch((err) => {
+            console.log("failed to fetch most lang: " + err)
             setError(true)
         });
     }, [animateValue]);
