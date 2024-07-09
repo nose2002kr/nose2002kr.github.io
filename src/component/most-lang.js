@@ -3,8 +3,11 @@ import { get_most_lang, get_most_lang_svg } from "../api";
 import Tooltip from '@mui/material/Tooltip';
 
 import "./most-lang.css";
+import "./error.css";
 
 export const MostLanguage = () => {
+    const [error, setError] = useState(null);
+
     useEffect(() => {
         get_most_lang_svg().then((data) => {
             document.getElementById("svg_placeholder").innerHTML = data;
@@ -17,9 +20,18 @@ export const MostLanguage = () => {
             document.getElementById("most_lang_desc").style.opacity = 0;
             document.getElementById("most_lang_placeholder").innerHTML = Object.keys(data)[0];
             document.getElementById("most_lang_placeholder").style.opacity = 1.0
-            
+        }).catch(() => {
+            setError(true);
         });
     });
+
+    if (error) {
+        return (
+        <Tooltip title="가장 자주 사용하는 언어를 표시하는데.. 에러가 발생헀어요.." followCursor>
+            <div className="error-desc"/>;
+        </Tooltip> 
+        )
+    } 
 
     return (
         <div className="most_lang">
@@ -35,6 +47,7 @@ export const MostLanguage = () => {
 }
 
 export const Top3Language = () => {
+    const [error, setError] = useState(null);
     
     const [ top1Usage, setTop1Usage ] = useState([]);
     const [ top2Usage, setTop2Usage ] = useState([]);
@@ -80,9 +93,22 @@ export const Top3Language = () => {
                     ]
                 );
             })
+        }).catch(() => {
+            setError(true)
         });
     }, [animateValue]);
     
+    if (error) {
+        return (
+        <div className="h100">
+            <div className="card_title text_align_left h0">Favorite Languages</div>
+            <Tooltip title="언어 랭크를 표시하는데.. 에러가 발생헀어요.." followCursor>
+                <div className="error-desc"/>;
+            </Tooltip> 
+        </div>
+        )
+    } 
+
     return (
         <div className="h100">
             <div className="card_title text_align_left">Favorite Languages</div>

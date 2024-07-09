@@ -2,15 +2,31 @@ import React, { useState, useEffect } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 
 import './videos.css';
+import './error.css';
 import { get_videos } from '../api';
 
 const Videos = () => {
-    const [videos, setVideos] = useState(null);
+  const [error, setError] = useState(null);
+  const [videos, setVideos] = useState(null);
     useEffect(() => {
         get_videos()
         .then((e) => setVideos(e))
-        .catch((e) => console.log("failed to fetch video lists: " + e));
+        .catch((e) => {
+          console.log("failed to fetch video lists: " + e);
+          setError(true);
+        });
     }, []);
+
+  if (error) { 
+    return (
+      <div className='h100'>
+      <h1 className='h0'>Project</h1>
+        <Tooltip title="프로젝트 목록을 표시하는데.. 에러가 발생헀어요.." followCursor>
+          <div className="error-desc"/>
+        </Tooltip>
+      </div>
+    )
+  }
 
   return(
     <div>

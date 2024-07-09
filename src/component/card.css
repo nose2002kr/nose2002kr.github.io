@@ -196,6 +196,10 @@ ul {
     height: 100%;
 }
 
+.h0 {
+    height: 0%;
+}
+
 .card {
     display: block;
     background: var(--gunmetal-blue);
