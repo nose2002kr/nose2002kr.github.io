@@ -53,6 +53,8 @@ ul {
     background: var(--silver-foil-gray);
     flex-direction: column;
     margin: 20px;
+    container-name: frame;
+    container-type: inline-size;
 }
 
 .panel {
@@ -185,11 +187,12 @@ ul {
 }
 .card_panel {
     display: grid;
-    grid-template-columns: 1fr 1.3fr 1fr;
     grid-auto-rows: 180px;
     row-gap: 10px;
     column-gap: 10px;
     height: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+
 }
 
 .h100 {
@@ -213,16 +216,18 @@ ul {
     background-color: var(--beige-white);
 }
 
+@container frame (min-width: 840px) {
+    .col_span {
+        grid-column: span 2;
+    }
+    
+    .col_span_2 {
+        grid-column: span 3;
+    }
+}
+
 .row_span {
     grid-row: span 2;
-}
-
-.col_span {
-    grid-column: span 2;
-}
-
-.col_span_2 {
-    grid-column: span 3;
 }
 
 .night {
