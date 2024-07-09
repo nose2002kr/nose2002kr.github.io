@@ -18,17 +18,32 @@ const Avatar = (prop) => {
                 <div>
                     <div className='left_gravity no_text_wrap margin_bottom_small'>
                         <img 
+                            src='https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg'
+                            className='avatar_github_ci vertical_center'
+                            alt='github'/>
+                        <a href='https://nose2002kr.notion.site/Study-note-5bb7d904cd78462ba12bf7fa8c1cb6c1?pvs=74'>
+                            <span className='vertical_center'>KSKS</span>
+                        </a>
+                    </div>
+                    
+
+                    <div className='left_gravity no_text_wrap margin_bottom_small'>
+                        <img 
                             src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/600px-Octicons-mark-github.svg.png'
                             className='avatar_github_ci vertical_center'
                             alt='github'/>
-                        <span className='vertical_center'>nose2002kr</span>
+                        <a href='https://github.com/nose2002kr'>
+                            <span className='vertical_center'>nose2002kr</span>
+                        </a>
                     </div>
                     <div className='left_gravity no_text_wrap margin_bottom_small'>
-                    <img 
-                        src='https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg'
-                        className='avatar_github_ci vertical_center'
-                        alt='linkedin'/>
-                    <span className='vertical_center'>경섭 이</span>
+                        <img 
+                            src='https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg'
+                            className='avatar_github_ci vertical_center'
+                            alt='linkedin'/>
+                        <a href='https://www.linkedin.com/in/%EA%B2%BD%EC%84%AD-%EC%9D%B4-678716301/'>
+                            <span className='vertical_center'>경섭 이</span>
+                        </a>
                     </div>
                 </div>
             </div>
