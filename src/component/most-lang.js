@@ -35,15 +35,15 @@ export const MostLanguage = () => {
     } 
 
     return (
+        <Tooltip title="가장 자주 사용한 언어😎" followCursor>
         <div className="most_lang">
-            <Tooltip title="가장 자주 사용한 언어😎">
             <div id="svg_placeholder"></div>
-            </Tooltip>
             <div className="most_lang_box">
                 <div id="most_lang_desc">Most used language</div>
                 <div id="most_lang_placeholder"></div>
             </div>
         </div>
+        </Tooltip>
     )
 }
 

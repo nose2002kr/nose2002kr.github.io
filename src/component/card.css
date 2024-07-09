@@ -200,6 +200,12 @@ ul {
     }
 }
 
+@container frame (max-width: 550px) {
+    #server {
+        grid-row: span 2;
+    }
+}
+
 .h100 {
     height: 100%;
 }

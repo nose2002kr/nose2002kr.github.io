@@ -4,12 +4,12 @@
     padding-left: 5%;
     width:100%;
     display: flex;
-    padding-top: 10%;
-    padding-bottom: 10%;
+    align-items: center;
 }
 .avatar_user {
     border-radius: 25px;
-    width:50%;
+    max-width:50%;
+    max-height:100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.18);
     min-width: 100px;
     object-fit: cover;
