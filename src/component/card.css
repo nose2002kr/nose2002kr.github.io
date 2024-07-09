@@ -192,7 +192,12 @@ ul {
     column-gap: 10px;
     height: 100%;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+}
 
+@container frame (min-width: 840px) {
+    .card_panel {
+        grid-template-columns: 1fr 1.3fr 1fr;
+    }
 }
 
 .h100 {
