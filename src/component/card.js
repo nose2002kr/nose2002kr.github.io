@@ -57,9 +57,8 @@ const Card = () => {
                 <TechStack/>
             </div>
             
-            <div className='card col_span empty_card' id='trend'>
-                <ComingSoon/>
-                {/* <iframe src='https://madnight.github.io/githut/#/pull_requests/2024/1' onLoad={() => removeAllExcept(document.querySelector('.highcharts-root'))}></iframe> */}
+            <div className='card col_span' id='trend'>
+                <iframe src='/githut/#/pull_requests/2024/1' title='trend' ></iframe>
             </div>
             <div className='card begie' id='profile'>
                 <Avatar name='true'/>
