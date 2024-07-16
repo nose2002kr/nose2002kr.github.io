@@ -275,4 +275,10 @@ ul {
     outline: 2px solid pink;
 }
 
+#trend>iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+}
 /* --------------------------- */
