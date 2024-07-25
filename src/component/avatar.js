@@ -21,7 +21,7 @@ const Avatar = (prop) => {
                             src='https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg'
                             className='avatar_github_ci vertical_center'
                             alt='github'/>
-                        <a href='https://nose2002kr.notion.site/Study-note-5bb7d904cd78462ba12bf7fa8c1cb6c1?pvs=74'>
+                        <a href='https://nose2002kr.notion.site/KSKS-49ef8cf291cc4f63a776d39afc3990be?pvs=74'>
                             <span className='vertical_center'>KSKS</span>
                         </a>
                     </div>
